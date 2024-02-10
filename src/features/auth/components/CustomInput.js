@@ -1,6 +1,7 @@
 import { Text, TextInput, View, StyleSheet } from "react-native";
 import { Controller } from "react-hook-form";
-import styles from "src/shared/constants/style_constants";
+import { GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
+
 
 
 function CustomInput({control, name, placeHolder, secureTextEntry, required}) {
@@ -26,6 +27,14 @@ function CustomInput({control, name, placeHolder, secureTextEntry, required}) {
     );
 
 }
-
+const styles = StyleSheet.create({
+    inputField:{
+        borderWidth:1,
+        borderColor:GREY_COLOR.light,
+        borderRadius: 60,
+        padding:16,
+        paddingLeft:20,
+    }
+})
 
 export default CustomInput;
