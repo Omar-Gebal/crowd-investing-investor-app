@@ -4,36 +4,32 @@ import { GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 
 
 
-function CustomInput({control, name, placeHolder, secureTextEntry, required}) {
+function CustomInput({ control, name, placeholder, secureTextEntry, rules }) {
     return (
-        <View>
-            <Controller 
-                control={control}
-                name={name}
-                rules={{required: required}}
-                render ={({field: {value, onChange, onBlur}}) => (
-                    <View style={[styles.inputField]}>
-                    <TextInput 
-                     value={value}
-                     onChangeText={onChange}
-                     onBlue={onBlur}
-                     placeholder={placeHolder}
-                     secureTextEntry={secureTextEntry}/>
-                     </View>
-                )}
-
-            />
-        </View>
+        <Controller
+            control={control}
+            name={name}
+            rules={rules}
+            render={({ field: { value, onChange, onBlur } }) => (
+                <View style={[styles.inputField]}>
+                    <TextInput
+                        value={value}
+                        onChangeText={onChange}
+                        onBlue={onBlur}
+                        placeholder={placeholder}
+                        secureTextEntry={secureTextEntry} />
+                </View>
+            )}
+        />
     );
-
 }
 const styles = StyleSheet.create({
-    inputField:{
-        borderWidth:1,
-        borderColor:GREY_COLOR.light,
+    inputField: {
+        borderWidth: 1,
+        borderColor: GREY_COLOR.light,
         borderRadius: 60,
-        padding:16,
-        paddingLeft:20,
+        padding: 16,
+        paddingLeft: 20,
     }
 })
 

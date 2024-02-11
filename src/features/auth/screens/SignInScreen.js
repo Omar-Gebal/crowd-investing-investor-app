@@ -5,15 +5,12 @@ import CustomButton from "src/shared/components/CustomButton";
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 import { GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 import CustomSafeArea from "src/shared/components/CustomSafeArea";
+import HalfPressableSentence from "../components/HalfPressableSentence";
+import FormErrorText from "../components/FormErrorText";
+import { emailRegexPattern, passwordRegexPattern } from "src/shared/utils/validators";
 
 function SignInScreen(props) {
 
-    function handlePress(data) {
-        console.log(data)
-        console.log(insets)
-        console.log(navbarHeight)
-        console.log("Sign-in btn pressed")
-    }
 
     function forgotPassFn() {
         console.log("forgot pass pressed")
@@ -23,52 +20,82 @@ function SignInScreen(props) {
         console.log("Regitser btn pressed")
     }
 
+    function handlePress(data) {
+        console.log(data)
+        console.log(insets)
+        console.log(navbarHeight)
+        console.log("Sign-in btn pressed")
+    }
 
+    const { control, handleSubmit, formState: { errors } } = useForm({
+        defaultValues: {
+            email: "",
+            password: "",
+        }
+    });
 
-    const { control, handleSubmit } = useForm();
+    const fieldRequiredError = 'This field is required'
     //adding fonts tele3 7war so ill do it later
     return (
         <CustomSafeArea>
             <View style={styles.container}>
                 <View>
                     <Text style={styles.titelText}>Sign in to your Account</Text>
-                    <Text style={{ fontSize: FONT_SIZE.small, color: GREY_COLOR.medium }}>Please enter your credentials</Text>
+                    <Text style={styles.subtitleText}>Please enter your credentials</Text>
                 </View>
                 <View>
                     <View style={styles.formView}>
                         <View style={styles.inputView}>
                             <CustomInput
                                 name="email"
-                                placeHolder="Email"
+                                placeholder="Email"
                                 control={control}
+                                rules={
+                                    {
+                                        required: fieldRequiredError,
+                                        pattern: {
+                                            value: emailRegexPattern,
+                                            message: 'Email format invalid'
+                                        }
+                                    }
+                                }
                             />
+                            {errors.email && <FormErrorText text={errors.email.message} />}
                             <CustomInput
                                 name="password"
-                                placeHolder="Password"
-                                control={control} />
+                                placeholder="Password"
+                                control={control}
+                                rules={
+                                    {
+                                        required: fieldRequiredError,
+                                        pattern: {
+                                            value: passwordRegexPattern,
+                                            message: 'Password need to have at least 8 characters, 1 uppercase letter, 1 lower case letter, and 1 digit'
+                                        }
+                                    }
+                                }
+                            />
+                            {errors.password && <FormErrorText text={errors.password.message} />}
                             <Pressable onPress={forgotPassFn}>
                                 {({ pressed }) =>
                                     <Text style={{
-                                        color: pressed ? 'rgba(172,181,187,0.5)' : GREEN_COLOR,
+                                        color: pressed ? GREY_COLOR.light : GREEN_COLOR,
                                         fontSize: FONT_SIZE.small,
                                         textAlign: 'right'
-                                    }}>Forgot password?</Text>
+                                    }}>
+                                        Forgot password?
+                                    </Text>
                                 }
                             </Pressable>
                         </View>
                         <View style={styles.submitView}>
                             <CustomButton onPress={handleSubmit(handlePress)} title="Sign-In" />
-                            <Text style={{ color: GREY_COLOR.medium, textAlign: 'center' }}>Don't have an account?
-                                <Text style={{
-                                    color: GREEN_COLOR,
-                                    fontSize: FONT_SIZE.small,
-                                }} onPress={registerFn}> Register</Text>
-                            </Text>
+                            <HalfPressableSentence onPress={registerFn} part1={'Don\'t have an account?'} part2={'Register'} />
                         </View>
                     </View>
                 </View>
             </View>
-        </CustomSafeArea>
+        </CustomSafeArea >
     );
 }
 
@@ -97,6 +124,10 @@ const styles = StyleSheet.create({
     titelText: {
         fontSize: FONT_SIZE.large,
         fontWeight: 'bold',
+    },
+    subtitleText: {
+        fontSize: FONT_SIZE.small,
+        color: GREY_COLOR.medium,
     }
 
 })
