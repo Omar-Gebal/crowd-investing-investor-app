@@ -5,7 +5,7 @@ import CustomButton from "src/shared/components/CustomButton";
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 import { GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 
-function Sign_in_screen(props) {
+function SignInScreen(props) {
 
     function handlePress(data) {
         console.log(data)
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Sign_in_screen;
+export default SignInScreen;
