@@ -1,14 +1,17 @@
-import { SafeAreaView, Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, View, StyleSheet, Pressable } from "react-native";
 import { useForm } from "react-hook-form";
 import CustomInput from "src/features/auth/components/CustomInput";
 import CustomButton from "src/shared/components/CustomButton";
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 import { GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
+import CustomSafeArea from "src/shared/components/CustomSafeArea";
 
 function SignInScreen(props) {
 
     function handlePress(data) {
         console.log(data)
+        console.log(insets)
+        console.log(navbarHeight)
         console.log("Sign-in btn pressed")
     }
 
@@ -25,51 +28,53 @@ function SignInScreen(props) {
     const { control, handleSubmit } = useForm();
     //adding fonts tele3 7war so ill do it later
     return (
-        <SafeAreaView style={styles.container}>
-            <View>
-                <Text style={styles.titelText}>Sign in to your Account</Text>
-                <Text style={{ fontSize: FONT_SIZE.small, color: GREY_COLOR.medium }}>Please enter your credentials</Text>
-            </View>
-            <View>
-                <View style={styles.formView}>
-                    <View style={styles.inputView}>
-                        <CustomInput
-                            name="email"
-                            placeHolder="Email"
-                            control={control}
-                        />
-                        <CustomInput
-                            name="password"
-                            placeHolder="Password"
-                            control={control} />
-                        <Pressable onPress={forgotPassFn}>
-                            {({ pressed }) =>
+        <CustomSafeArea>
+            <View style={styles.container}>
+                <View>
+                    <Text style={styles.titelText}>Sign in to your Account</Text>
+                    <Text style={{ fontSize: FONT_SIZE.small, color: GREY_COLOR.medium }}>Please enter your credentials</Text>
+                </View>
+                <View>
+                    <View style={styles.formView}>
+                        <View style={styles.inputView}>
+                            <CustomInput
+                                name="email"
+                                placeHolder="Email"
+                                control={control}
+                            />
+                            <CustomInput
+                                name="password"
+                                placeHolder="Password"
+                                control={control} />
+                            <Pressable onPress={forgotPassFn}>
+                                {({ pressed }) =>
+                                    <Text style={{
+                                        color: pressed ? 'rgba(172,181,187,0.5)' : GREEN_COLOR,
+                                        fontSize: FONT_SIZE.small,
+                                        textAlign: 'right'
+                                    }}>Forgot password?</Text>
+                                }
+                            </Pressable>
+                        </View>
+                        <View style={styles.submitView}>
+                            <CustomButton onPress={handleSubmit(handlePress)} title="Sign-In" />
+                            <Text style={{ color: GREY_COLOR.medium, textAlign: 'center' }}>Don't have an account?
                                 <Text style={{
-                                    color: pressed ? 'rgba(172,181,187,0.5)' : GREEN_COLOR,
+                                    color: GREEN_COLOR,
                                     fontSize: FONT_SIZE.small,
-                                    textAlign: 'right'
-                                }}>Forgot password?</Text>
-                            }
-                        </Pressable>
-                    </View>
-                    <View style={styles.submitView}>
-                        <CustomButton onPress={handleSubmit(handlePress)} title="Sign-In" />
-                        <Text style={{ color: GREY_COLOR.medium, textAlign: 'center' }}>Don't have an account?
-                            <Text style={{
-                                color: GREEN_COLOR,
-                                fontSize: FONT_SIZE.small,
-                            }} onPress={registerFn}> Register</Text>
-                        </Text>
+                                }} onPress={registerFn}> Register</Text>
+                            </Text>
+                        </View>
                     </View>
                 </View>
             </View>
-        </SafeAreaView>
+        </CustomSafeArea>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-        padding: '5%',
+        paddingHorizontal: '5%',
         justifyContent: 'space-between',
         backgroundColor: 'white'
     },
