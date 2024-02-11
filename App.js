@@ -1,18 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { store } from './store'
+import { Provider } from 'react-redux'
+import { SafeAreaView } from "react-native";
+
 import SignInScreen from 'src/features/auth/screens/SignInScreen';
 
 export default function App() {
   return (
-    <SignInScreen />
+    <Provider store={store}>
+      <SignInScreen />
+    </Provider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
