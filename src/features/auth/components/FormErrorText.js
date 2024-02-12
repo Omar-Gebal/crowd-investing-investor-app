@@ -11,7 +11,8 @@ function FormErrorText({ text }) {
 const styles = StyleSheet.create({
     error: {
         color: ERROR_COLOR,
-        marginLeft: 20
+        marginLeft: 20,
+        marginTop: 5
     }
 })
 
