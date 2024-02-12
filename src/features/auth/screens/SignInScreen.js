@@ -8,6 +8,7 @@ import CustomSafeArea from "src/shared/components/CustomSafeArea";
 import HalfPressableSentence from "../components/HalfPressableSentence";
 import FormErrorText from "../components/FormErrorText";
 import { emailRegexPattern, passwordRegexPattern } from "src/shared/utils/validators";
+import AuthPageHeader from "../components/AuthPageHeader";
 
 function SignInScreen(props) {
 
@@ -40,8 +41,7 @@ function SignInScreen(props) {
         <CustomSafeArea>
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.titelText}>Sign in to your Account</Text>
-                    <Text style={styles.subtitleText}>Please enter your credentials</Text>
+                    <AuthPageHeader title={'Sign in to your account'} subtitle={'Please enter your credentials'} />
                 </View>
                 <View>
                     <View style={styles.formView}>
@@ -101,6 +101,7 @@ function SignInScreen(props) {
 
 const styles = StyleSheet.create({
     container: {
+        paddingVertical: '5%',
         paddingHorizontal: '5%',
         justifyContent: 'space-between',
         backgroundColor: 'white'
@@ -121,14 +122,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'flex-end'
     },
-    titelText: {
-        fontSize: FONT_SIZE.large,
-        fontWeight: 'bold',
-    },
-    subtitleText: {
-        fontSize: FONT_SIZE.small,
-        color: GREY_COLOR.medium,
-    }
 
 })
 
