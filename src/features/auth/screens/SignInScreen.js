@@ -23,7 +23,7 @@ function SignInScreen(props) {
 
     function handlePress(data) {
         console.log(data)
-        console.log(insets)
+        console.log(insets)      //incest?
         console.log(navbarHeight)
         console.log("Sign-in btn pressed")
     }
@@ -36,13 +36,13 @@ function SignInScreen(props) {
     });
 
     const fieldRequiredError = 'This field is required'
-    //adding fonts tele3 7war so ill do it later
+    //adding fonts tele3 7war so ill do it later      //why do you have two views inside eachother? you already have a view in the authheaderpage
     return (
         <CustomSafeArea>
             <View style={styles.container}>
-                <View>
+                                   
                     <AuthPageHeader title={'Sign in to your account'} subtitle={'Please enter your credentials'} />
-                </View>
+                
                 <View>
                     <View style={styles.formView}>
                         <View style={styles.inputView}>
@@ -101,8 +101,7 @@ function SignInScreen(props) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingVertical: '5%',
-        paddingHorizontal: '5%',
+        paddingHorizontal: '5%',            //add to conatsnts later
         justifyContent: 'space-between',
         backgroundColor: 'white'
     },
@@ -112,10 +111,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     formView: {
-        marginTop: '10%',
+        paddingBottom:'5%',              //add to constants later
         backgroundColor: 'white',
         height: '90%',
-        justifyContent: 'space-evenly'
+        justifyContent:'space-evenly'
     },
     submitView: {
         height: '50%',

@@ -114,7 +114,7 @@ function SignUpScreen(props) {
 
 const styles = StyleSheet.create({
     screenWrapper: {
-        padding: 20,
+        paddingHorizontal:'5%',
         backgroundColor: 'white',
     }
 
