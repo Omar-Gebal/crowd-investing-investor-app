@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Modal, StyleSheet } from "react-native";
-import { FONT_SIZE, GREY_COLOR } from "src/shared/constants/dimension_constants";
+import { Modal, StyleSheet, View, Text } from "react-native";
+import { FONT_SIZE} from "src/shared/constants/dimension_constants";
+import { GREY_COLOR } from "src/shared/constants/colorConstants";
+import CustomButton from "src/shared/components/CustomButton";
 
 
 function CustomModal({mainTxt, subTxt, visible, onPress}) {

@@ -4,6 +4,7 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import SignInScreen from 'src/features/auth/screens/SignInScreen';
 import SignUpScreen from 'src/features/auth/screens/SignUpScreen';
+import NewPasswordScreen from 'src/features/auth/screens/NewPasswordScreen';
 import ForgotPassScreen from 'src/features/auth/screens/ForgotPassScreen';
 import { View } from 'react-native';
 
@@ -12,7 +13,7 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaProvider>
 
-        <ForgotPassScreen/>
+        <NewPasswordScreen/>
 
       </SafeAreaProvider>
     </Provider>
