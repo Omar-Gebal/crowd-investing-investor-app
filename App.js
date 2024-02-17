@@ -13,7 +13,7 @@ export default function App() {
     <Provider store={store}>
       <SafeAreaProvider>
 
-        <NewPasswordScreen/>
+        <NewPasswordScreen />
 
       </SafeAreaProvider>
     </Provider>

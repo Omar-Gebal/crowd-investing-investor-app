@@ -14,18 +14,14 @@ function AuthPageHeader({ title, subtitle }) {
 export default AuthPageHeader;
 
 const styles = StyleSheet.create({
-    container:{
-        margin:'5%',                //i think we should put styles on the header here bcs the paddings and margins are not consistant in both sign in and signup 
-        backgroundColor:'white'    //ok i did it 
-    
-    },                             
     titelText: {
         fontSize: FONT_SIZE.large,
-        marginBottom:'2%',
+        marginBottom: 10,
         fontWeight: 'bold',
     },
     subtitleText: {
         fontSize: FONT_SIZE.small,
         color: GREY_COLOR.medium,
+
     }
 })

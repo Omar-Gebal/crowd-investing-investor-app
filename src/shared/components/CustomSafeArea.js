@@ -11,7 +11,7 @@ const isIOS = Platform.OS === 'ios';
 
 const CustomSafeArea = ({ children }) => {
     return (
-        <SafeAreaView style={{ paddingBottom: (!isIOS) ? `${navbarHeight}px` : 0 }}>
+        <SafeAreaView style={{ paddingBottom: (!isIOS) ? `${navbarHeight}px` : 0, flex: 1 }}>
             {children}
         </SafeAreaView>
     );

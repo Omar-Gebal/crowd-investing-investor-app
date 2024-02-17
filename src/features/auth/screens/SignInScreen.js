@@ -40,9 +40,9 @@ function SignInScreen(props) {
     return (
         <CustomSafeArea>
             <View style={styles.container}>
-                                   
-                    <AuthPageHeader title={'Sign in to your account'} subtitle={'Please enter your credentials'} />
-                
+
+                <AuthPageHeader title={'Sign in to your account'} subtitle={'Please enter your credentials'} />
+
                 <View>
                     <View style={styles.formView}>
                         <View style={styles.inputView}>
@@ -111,10 +111,10 @@ const styles = StyleSheet.create({
         justifyContent: 'space-evenly'
     },
     formView: {
-        paddingBottom:'5%',              //add to constants later
+        paddingBottom: '5%',              //add to constants later
         backgroundColor: 'white',
         height: '90%',
-        justifyContent:'space-evenly'
+        justifyContent: 'space-evenly'
     },
     submitView: {
         height: '50%',
