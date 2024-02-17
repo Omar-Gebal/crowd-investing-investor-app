@@ -47,7 +47,7 @@ function NewPasswordScreen(props) {
                                     required: fieldRequiredError,
                                     pattern: {
                                         value: passwordRegexPattern,
-                                        message: 'Password need to have at least 8 characters, 1 uppercase letter, 1 lower case letter, and 1 digit'
+                                        message: 'Password need to have at least 8 characters, 1 uppercase letter, 1 lower case letter, 1 digit and 1 special character'
                                     }
                                 }
                             }
@@ -70,7 +70,7 @@ function NewPasswordScreen(props) {
                     </View>
                     <CustomButton title="Reset Password" onPress={handleSubmit(handlePress)} />
                 </View>
-                <CustomModal mainTxt="Reset succesful" subTxt="please re-logn to get started" visible={modalVisible} onPress={handleModal} />
+                <CustomModal mainTxt="Reset succesful" subTxt="please re-login to get started" visible={modalVisible} onPress={handleModal} />
             </View>
         </CustomSafeArea>
     );

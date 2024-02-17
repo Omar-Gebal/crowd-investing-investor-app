@@ -82,7 +82,7 @@ function SignUpScreen(props) {
                                 required: fieldRequiredError,
                                 pattern: {
                                     value: passwordRegexPattern,
-                                    message: 'Password need to have at least 8 characters, 1 uppercase letter, 1 lower case letter, and 1 digit'
+                                    message: 'Password need to have at least 8 characters, 1 uppercase letter, 1 lower case letter, 1 digit and 1 special character'
                                 }
                             }
                         }
@@ -114,7 +114,7 @@ function SignUpScreen(props) {
 
 const styles = StyleSheet.create({
     screenWrapper: {
-        paddingHorizontal:'5%',
+        paddingHorizontal: '5%',
         backgroundColor: 'white',
     }
 

@@ -68,10 +68,6 @@ function SignInScreen(props) {
                                 rules={
                                     {
                                         required: fieldRequiredError,
-                                        pattern: {
-                                            value: passwordRegexPattern,
-                                            message: 'Password need to have at least 8 characters, 1 uppercase letter, 1 lower case letter, and 1 digit'
-                                        }
                                     }
                                 }
                             />
