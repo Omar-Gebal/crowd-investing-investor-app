@@ -15,7 +15,7 @@ function CustomInput({ control, name, placeholder, secureTextEntry, rules }) {
                     <TextInput
                         value={value}
                         onChangeText={onChange}
-                        onBlue={onBlur}
+                        onBlur={onBlur}
                         placeholder={placeholder}
                         secureTextEntry={secureTextEntry} />
                 </View>

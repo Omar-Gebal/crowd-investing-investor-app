@@ -4,7 +4,7 @@ import { GREY_COLOR } from 'src/shared/constants/colorConstants';
 
 function AuthPageHeader({ title, subtitle }) {
     return (
-        <View>
+        <View style={styles.container}>
             <Text style={styles.titelText}>{title}</Text>
             <Text style={styles.subtitleText}>{subtitle}</Text>
         </View>
@@ -16,10 +16,12 @@ export default AuthPageHeader;
 const styles = StyleSheet.create({
     titelText: {
         fontSize: FONT_SIZE.large,
+        marginBottom: 10,
         fontWeight: 'bold',
     },
     subtitleText: {
         fontSize: FONT_SIZE.small,
         color: GREY_COLOR.medium,
+
     }
 })
