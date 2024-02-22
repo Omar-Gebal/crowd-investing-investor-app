@@ -10,7 +10,7 @@ import { useState } from "react";
 import CustomModal from "src/features/auth/components/CustomModal";
 
 
-export default function ForgotPassScreen(props) {
+export default function ForgotPassScreen({ navigation }) {
 
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -22,6 +22,7 @@ export default function ForgotPassScreen(props) {
         console.log(data);
         handleModal();
         console.log("Next pressed");
+        navigation.navigate("NewPassword")
 
     }
 

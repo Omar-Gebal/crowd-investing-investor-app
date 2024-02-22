@@ -10,15 +10,18 @@ import FormErrorText from "../components/FormErrorText";
 import { emailRegexPattern, passwordRegexPattern } from "src/shared/utils/validators";
 import AuthPageHeader from "../components/AuthPageHeader";
 
-function SignInScreen(props) {
+function SignInScreen({ navigation }) {
 
 
     function forgotPassFn() {
+        navigation.navigate("ForgetPass")
         console.log("forgot pass pressed")
     }
 
     function registerFn() {
-        console.log("Regitser btn pressed")
+        navigation.navigate("SignUp")
+        console.log("register btn pressed")
+
     }
 
     function handlePress(data) {
