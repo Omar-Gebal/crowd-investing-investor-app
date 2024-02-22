@@ -1,9 +1,11 @@
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, Dimensions } from "react-native";
 import CustomSafeArea from "src/shared/components/CustomSafeArea";
 import { BLACK_COLOR, ERROR_COLOR, GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 import { Entypo, Fontisto, AntDesign } from '@expo/vector-icons';
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
-export default function HomeScreen({ navigation }) {
+import { LineChart } from 'react-native-chart-kit'
+
+export default function HomeScreen() {
 
     const user = {
         name: "Ali Husni",
@@ -14,7 +16,15 @@ export default function HomeScreen({ navigation }) {
     }
     const formattedBalance = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.balance)
     const formattedSpending = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.spending)
-
+    const lineChartData = {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        datasets: [
+            {
+                data: [60, 50, 70, 80, 105, 80, 70, 60, 80, 90, 100, 80, 70]
+            },
+        ],
+    };
+    var graphWidth;
     return (
         <CustomSafeArea style={{ backgroundColor: GREEN_COLOR.main }}>
             <View style={styles.topContainer}>
@@ -37,7 +47,7 @@ export default function HomeScreen({ navigation }) {
 
             </View>
             <View style={styles.lowerContainer}>
-                <View style={styles.floatingCard}>
+                <View style={styles.floatingCard} >
                     <View style={styles.spendingCont}>
                         <View>
                             <Text style={styles.spendingHeading}>Total Spending</Text>
@@ -51,7 +61,30 @@ export default function HomeScreen({ navigation }) {
                             <Entypo name="chevron-right" size={24} color={GREY_COLOR.light} />
                         </View>
                     </View>
-
+                    <LineChart
+                        style={styles.lineGraph}
+                        data={lineChartData}
+                        height={75}
+                        width={Dimensions.get("screen").width}
+                        chartConfig={{
+                            backgroundColor: "#FFFFFF00",
+                            backgroundGradientFrom: "#FFFFFF00",
+                            backgroundGradientTo: "#FFFFFF00",
+                            color: (opacity = 3) => `rgba(255, 92, 122, ${opacity})`,
+                            fillShadowGradientFrom: ERROR_COLOR.light,
+                            fillShadowGradientFromOpacity: 0.3,
+                            fillShadowGradientToOpacity: 0,
+                            strokeWidth: 3,
+                            backgroundGradientToOpacity: 0,
+                            backgroundGradientFromOpacity: 0
+                        }}
+                        withHorizontalLabels={false}
+                        withVerticalLabels={false}
+                        withHorizontalLines={false}
+                        withVerticalLines={false}
+                        withDots={false}
+                        bezier
+                    />
                 </View>
             </View>
 
@@ -128,7 +161,6 @@ const styles = StyleSheet.create({
         marginBottom: 131
     },
     floatingCard: {
-        height: 200,
         backgroundColor: "red",
         position: "relative",
         top: -95,
@@ -139,14 +171,16 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 34 },
         shadowColor: "#08090B12",
         shadowOpacity: 0.7,
-        shadowRadius: 200
-
+        shadowRadius: 200,
+        display: "flex",
+        alignItems: "center"
     },
     spendingCont: {
         display: "flex",
         flexDirection: "row",
         justifyContent: "space-between",
-        alignItems: "center"
+        alignItems: "center",
+        width: "100%"
     },
     spendingHeading: {
         color: GREY_COLOR.light,
@@ -183,6 +217,10 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         lineHeight: 21,
         marginLeft: 2
+    },
+    lineGraph: {
+        position: "relative",
+        left: -20
     }
 
 });
