@@ -78,7 +78,7 @@ function SignInScreen({ navigation }) {
                             <Pressable onPress={forgotPassFn}>
                                 {({ pressed }) =>
                                     <Text style={{
-                                        color: pressed ? GREY_COLOR.light : GREEN_COLOR,
+                                        color: pressed ? GREY_COLOR.light : GREEN_COLOR.main_lighter,
                                         fontSize: FONT_SIZE.small,
                                         textAlign: 'right'
                                     }}>

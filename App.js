@@ -8,6 +8,7 @@ import SignInScreen from 'src/features/auth/screens/SignInScreen';
 import SignUpScreen from 'src/features/auth/screens/SignUpScreen';
 import NewPasswordScreen from 'src/features/auth/screens/NewPasswordScreen';
 import ForgotPassScreen from 'src/features/auth/screens/ForgotPassScreen';
+import HomeScreen from 'src/features/home/screens/HomeScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -17,6 +18,8 @@ export default function App() {
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name='Home' component={HomeScreen} />
+
             <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
             <Stack.Screen name='ForgetPass' component={ForgotPassScreen} />

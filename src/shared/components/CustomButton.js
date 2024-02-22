@@ -8,7 +8,7 @@ function CustomButton({ onPress, title }) {
         <Pressable onPress={onPress} style={({ pressed }) => [
             styles.button,
             {
-                backgroundColor: pressed ? GREY_COLOR.light : GREEN_COLOR,
+                backgroundColor: pressed ? GREY_COLOR.light : GREEN_COLOR.main_lighter,
             }]} >
             <Text style={styles.buttontxt}>{title}</Text>
         </Pressable>
@@ -17,7 +17,7 @@ function CustomButton({ onPress, title }) {
 }
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: GREEN_COLOR,
+        backgroundColor: GREEN_COLOR.main_lighter,
         textAlign: "center",
         padding: 16,
         borderRadius: 50

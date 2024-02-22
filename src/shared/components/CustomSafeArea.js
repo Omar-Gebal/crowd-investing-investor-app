@@ -9,9 +9,9 @@ const windowHeight = Dimensions.get('window').height;
 const navbarHeight = screenHeight - windowHeight + StatusBar.currentHeight;
 const isIOS = Platform.OS === 'ios';
 
-const CustomSafeArea = ({ children }) => {
+const CustomSafeArea = ({ children, style }) => {
     return (
-        <SafeAreaView style={{ paddingBottom: (!isIOS) ? `${navbarHeight}px` : 0, flex: 1 }}>
+        <SafeAreaView style={[{ paddingBottom: (!isIOS) ? `${navbarHeight}px` : 0, flex: 1 }, style]}>
             {children}
         </SafeAreaView>
     );
