@@ -11,7 +11,11 @@ import { emailRegexPattern, passwordRegexPattern } from 'src/shared/utils/valida
 import FormErrorText from '../components/FormErrorText';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-function SignUpScreen(props) {
+function SignUpScreen({ navigation }) {
+
+    function signInFn() {
+        navigation.navigate("SignIn")
+    }
 
     const { control, handleSubmit, formState: { errors }, watch } = useForm({
         defaultValues: {
@@ -105,7 +109,7 @@ function SignUpScreen(props) {
 
                     <DefaultVerticalSpacing />
                     <CustomButton onPress={handleSubmit(console.log('TEEHE'))} title="Create account" />
-                    <HalfPressableSentence part1={'Already have an account?'} part2={'Sign In'} />
+                    <HalfPressableSentence part1={'Already have an account?'} part2={'Sign In'} onPress={signInFn} />
                 </View>
             </ScrollView>
         </CustomSafeArea>
