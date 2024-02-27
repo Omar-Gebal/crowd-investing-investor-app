@@ -35,7 +35,6 @@ function SignInScreen({ navigation }) {
         if ('data' in response) {
             navigation.replace('Home');
         }
-
     }
 
     const { control, handleSubmit, formState: { errors } } = useForm({

@@ -9,12 +9,13 @@ import HalfPressableSentence from '../components/HalfPressableSentence';
 import DefaultVerticalSpacing from '../components/DefaultVerticalSpacing';
 import { emailRegexPattern, passwordRegexPattern } from 'src/shared/utils/validators';
 import FormErrorText from '../components/FormErrorText';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { useSignUpMutation } from 'src/shared/state/api/apiSlice';
 
 function SignUpScreen({ navigation }) {
+    const [signUp, { isLoading, error }] = useSignUpMutation();
 
-    function signInFn() {
-        navigation.navigate("SignIn")
+    async function handleSignUp(data) {
+        const response = await signUp(data);
     }
 
     const { control, handleSubmit, formState: { errors }, watch } = useForm({
@@ -108,8 +109,8 @@ function SignUpScreen({ navigation }) {
                     {errors.repeat_password && <FormErrorText text={errors.repeat_password.message} />}
 
                     <DefaultVerticalSpacing />
-                    <CustomButton onPress={handleSubmit(console.log('TEEHE'))} title="Create account" />
-                    <HalfPressableSentence part1={'Already have an account?'} part2={'Sign In'} onPress={signInFn} />
+                    <CustomButton onPress={handleSubmit(handleSignUp)} title="Create account" />
+                    <HalfPressableSentence part1={'Already have an account?'} part2={'Sign In'} onPress={() => navigation.navigate("SignIn")} />
                 </View>
             </ScrollView>
         </CustomSafeArea>
@@ -118,6 +119,7 @@ function SignUpScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     screenWrapper: {
+        flex: 1,
         paddingHorizontal: '5%',
         backgroundColor: 'white',
     }
