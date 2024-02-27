@@ -18,9 +18,8 @@ export default function App() {
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='Home' component={HomeScreen} />
-
             <Stack.Screen name='SignIn' component={SignInScreen} />
+            <Stack.Screen name='Home' component={HomeScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
             <Stack.Screen name='ForgetPass' component={ForgotPassScreen} />
             <Stack.Screen name='NewPassword' component={NewPasswordScreen} />

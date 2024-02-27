@@ -9,8 +9,13 @@ import HalfPressableSentence from "../components/HalfPressableSentence";
 import FormErrorText from "../components/FormErrorText";
 import { emailRegexPattern, passwordRegexPattern } from "src/shared/utils/validators";
 import AuthPageHeader from "../components/AuthPageHeader";
+import { useSignInMutation } from "src/shared/state/api/apiSlice";
+import DefaultVerticalSpacing from "../components/DefaultVerticalSpacing";
 
 function SignInScreen({ navigation }) {
+
+    const [signIn, { isLoading, error }] = useSignInMutation();
+
 
 
     function forgotPassFn() {
@@ -24,11 +29,9 @@ function SignInScreen({ navigation }) {
 
     }
 
-    function handlePress(data) {
+    async function handleSignIn(data) {
         console.log(data)
-        console.log(insets)      //incest?
-        console.log(navbarHeight)
-        console.log("Sign-in btn pressed")
+
     }
 
     const { control, handleSubmit, formState: { errors } } = useForm({
@@ -39,58 +42,56 @@ function SignInScreen({ navigation }) {
     });
 
     const fieldRequiredError = 'This field is required'
-    //adding fonts tele3 7war so ill do it later      //why do you have two views inside eachother? you already have a view in the authheaderpage
     return (
         <CustomSafeArea>
             <View style={styles.container}>
 
                 <AuthPageHeader title={'Sign in to your account'} subtitle={'Please enter your credentials'} />
-
-                <View>
-                    <View style={styles.formView}>
-                        <View style={styles.inputView}>
-                            <CustomInput
-                                name="email"
-                                placeholder="Email"
-                                control={control}
-                                rules={
-                                    {
-                                        required: fieldRequiredError,
-                                        pattern: {
-                                            value: emailRegexPattern,
-                                            message: 'Email format invalid'
-                                        }
+                <DefaultVerticalSpacing />
+                <View style={styles.formView}>
+                    <View style={styles.inputView}>
+                        <CustomInput
+                            name="email"
+                            placeholder="Email"
+                            control={control}
+                            rules={
+                                {
+                                    required: fieldRequiredError,
+                                    pattern: {
+                                        value: emailRegexPattern,
+                                        message: 'Email format invalid'
                                     }
                                 }
-                            />
-                            {errors.email && <FormErrorText text={errors.email.message} />}
-                            <CustomInput
-                                name="password"
-                                placeholder="Password"
-                                control={control}
-                                rules={
-                                    {
-                                        required: fieldRequiredError,
-                                    }
+                            }
+                        />
+                        {errors.email && <FormErrorText text={errors.email.message} />}
+                        <DefaultVerticalSpacing />
+                        <CustomInput
+                            name="password"
+                            placeholder="Password"
+                            control={control}
+                            rules={
+                                {
+                                    required: fieldRequiredError,
                                 }
-                            />
-                            {errors.password && <FormErrorText text={errors.password.message} />}
-                            <Pressable onPress={forgotPassFn}>
-                                {({ pressed }) =>
-                                    <Text style={{
-                                        color: pressed ? GREY_COLOR.light : GREEN_COLOR.main_lighter,
-                                        fontSize: FONT_SIZE.small,
-                                        textAlign: 'right'
-                                    }}>
-                                        Forgot password?
-                                    </Text>
-                                }
-                            </Pressable>
-                        </View>
-                        <View style={styles.submitView}>
-                            <CustomButton onPress={handleSubmit(handlePress)} title="Sign-In" />
-                            <HalfPressableSentence onPress={registerFn} part1={'Don\'t have an account?'} part2={'Register'} />
-                        </View>
+                            }
+                        />
+                        {errors.password && <FormErrorText text={errors.password.message} />}
+                        <Pressable onPress={forgotPassFn}>
+                            {({ pressed }) =>
+                                <Text style={{
+                                    color: pressed ? GREY_COLOR.light : GREEN_COLOR.main_lighter,
+                                    fontSize: FONT_SIZE.small,
+                                    textAlign: 'right'
+                                }}>
+                                    Forgot password?
+                                </Text>
+                            }
+                        </Pressable>
+                    </View>
+                    <View style={styles.submitView}>
+                        <CustomButton onPress={handleSubmit(handleSignIn)} title="Sign-In" />
+                        <HalfPressableSentence onPress={registerFn} part1={'Don\'t have an account?'} part2={'Register'} />
                     </View>
                 </View>
             </View>
@@ -100,23 +101,21 @@ function SignInScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        paddingHorizontal: '5%',            //add to conatsnts later
-        justifyContent: 'space-between',
+        flex: 1,
+        padding: '5%',
+        justifyContent: 'flex-start',
         backgroundColor: 'white'
     },
     inputView: {
         backgroundColor: 'white',
-        height: '40%',
         justifyContent: 'space-evenly'
     },
     formView: {
-        paddingBottom: '5%',              //add to constants later
+        flex: 1,
         backgroundColor: 'white',
-        height: '90%',
-        justifyContent: 'space-evenly'
+        justifyContent: 'space-between',
     },
     submitView: {
-        height: '50%',
         backgroundColor: 'white',
         justifyContent: 'flex-end'
     },
