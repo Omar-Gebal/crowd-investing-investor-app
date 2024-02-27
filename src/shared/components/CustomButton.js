@@ -17,9 +17,10 @@ function CustomButton({ onPress, title }) {
 }
 const styles = StyleSheet.create({
     button: {
+        display: 'flex',
+        justifyContent: 'center',
         backgroundColor: GREEN_COLOR.main_lighter,
-        textAlign: "center",
-        padding: 16,
+        height: 50,
         borderRadius: 50
     },
     buttontxt: {

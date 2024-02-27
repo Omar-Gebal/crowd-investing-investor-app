@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Text, View, StyleSheet, Pressable, ActivityIndicator } from "react-native";
 import { useForm } from "react-hook-form";
 import CustomInput from "src/features/auth/components/CustomInput";
 import CustomButton from "src/shared/components/CustomButton";
@@ -11,6 +11,7 @@ import { emailRegexPattern, passwordRegexPattern } from "src/shared/utils/valida
 import AuthPageHeader from "../components/AuthPageHeader";
 import { useSignInMutation } from "src/shared/state/api/apiSlice";
 import DefaultVerticalSpacing from "../components/DefaultVerticalSpacing";
+import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
 
 function SignInScreen({ navigation }) {
 
@@ -30,7 +31,10 @@ function SignInScreen({ navigation }) {
     }
 
     async function handleSignIn(data) {
-        console.log(data)
+        const response = await signIn(data);
+        if ('data' in response) {
+            navigation.replace('Home');
+        }
 
     }
 
@@ -65,6 +69,7 @@ function SignInScreen({ navigation }) {
                             }
                         />
                         {errors.email && <FormErrorText text={errors.email.message} />}
+                        {error && <FormErrorText text={'Wrong Email or Password'} />}
                         <DefaultVerticalSpacing />
                         <CustomInput
                             name="password"
@@ -90,7 +95,7 @@ function SignInScreen({ navigation }) {
                         </Pressable>
                     </View>
                     <View style={styles.submitView}>
-                        <CustomButton onPress={handleSubmit(handleSignIn)} title="Sign-In" />
+                        <CustomButton onPress={handleSubmit(handleSignIn)} title={isLoading ? <DefaultActivityIndicator /> : "Sign in"} />
                         <HalfPressableSentence onPress={registerFn} part1={'Don\'t have an account?'} part2={'Register'} />
                     </View>
                 </View>
