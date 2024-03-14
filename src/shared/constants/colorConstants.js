@@ -1,11 +1,17 @@
-const GREEN_COLOR = {
+//green
+const PRIMARY_COLOR = {
     light: "#DCECE9",
     main_lighter: "#34B67F",
     main: "#269C76"
 };
 
+//blue
+const SECONDARY_COLOR = {
+    main: "#0093D2"
+}
+
 const GREY_COLOR = {
-    lightest: "#FAFAFB",
+    lightest: "#eee",
     light: "#ACB5BB",
     medium: "#6C7278"
 }
@@ -19,4 +25,4 @@ const BLACK_COLOR = {
 }
 
 
-export { GREEN_COLOR, GREY_COLOR, ERROR_COLOR, BLACK_COLOR };
+export { PRIMARY_COLOR, SECONDARY_COLOR, GREY_COLOR, ERROR_COLOR, BLACK_COLOR };

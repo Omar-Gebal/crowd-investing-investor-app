@@ -1,6 +1,6 @@
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import CustomSafeArea from "src/shared/components/CustomSafeArea";
-import { BLACK_COLOR, ERROR_COLOR, GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
+import { BLACK_COLOR, ERROR_COLOR, PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 import { Entypo, Fontisto, AntDesign } from '@expo/vector-icons';
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 import { LineChart } from 'react-native-chart-kit'
@@ -26,7 +26,7 @@ export default function HomeScreen() {
     };
     var graphWidth;
     return (
-        <CustomSafeArea style={{ backgroundColor: GREEN_COLOR.main }}>
+        <CustomSafeArea style={{ backgroundColor: PRIMARY_COLOR.main }}>
             <View style={styles.topContainer}>
                 <View style={styles.headerBar}>
                     <View style={styles.greetingContainer}>
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
         fontSize: FONT_SIZE.medium,
         lineHeight: FONT_SIZE.medium + 5,
         fontWeight: "500",
-        color: GREEN_COLOR.light,
+        color: PRIMARY_COLOR.light,
     },
     userName: {
         fontSize: FONT_SIZE.medium,
@@ -146,7 +146,7 @@ const styles = StyleSheet.create({
         left: 9
     },
     balanceHeading: {
-        color: GREEN_COLOR.light,
+        color: PRIMARY_COLOR.light,
         fontSize: FONT_SIZE.small,
         lineHeight: 21,
         marginBottom: 12,

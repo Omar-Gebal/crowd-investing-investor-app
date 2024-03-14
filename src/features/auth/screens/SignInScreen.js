@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import CustomInput from "src/features/auth/components/CustomInput";
 import CustomButton from "src/shared/components/CustomButton";
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
-import { GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
+import { PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 import CustomSafeArea from "src/shared/components/CustomSafeArea";
 import HalfPressableSentence from "../components/HalfPressableSentence";
 import FormErrorText from "../components/FormErrorText";
@@ -84,7 +84,7 @@ function SignInScreen({ navigation }) {
                         <Pressable onPress={forgotPassFn}>
                             {({ pressed }) =>
                                 <Text style={{
-                                    color: pressed ? GREY_COLOR.light : GREEN_COLOR.main_lighter,
+                                    color: pressed ? GREY_COLOR.light : PRIMARY_COLOR.main_lighter,
                                     fontSize: FONT_SIZE.small,
                                     textAlign: 'right'
                                 }}>

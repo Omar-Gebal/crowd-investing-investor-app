@@ -1,6 +1,6 @@
 import { Text, TextInput, View, StyleSheet } from "react-native";
 import { Controller } from "react-hook-form";
-import { GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
+import { PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 
 
 

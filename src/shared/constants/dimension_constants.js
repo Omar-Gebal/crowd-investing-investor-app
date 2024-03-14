@@ -1,9 +1,9 @@
-const FONT_SIZE= {
-    small: 18,
-    medium: 20,
-    large: 35
+const FONT_SIZE = {
+    small: 14,
+    medium: 18,
+    large: 26
 }
 
 
 
-export {FONT_SIZE}; 
+export { FONT_SIZE }; 

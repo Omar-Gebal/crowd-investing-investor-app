@@ -1,16 +1,31 @@
-import { store } from '../../../store'
-import { Provider } from 'react-redux'
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from 'src/features/home/screens/HomeScreen';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import { AntDesign } from '@expo/vector-icons';
+import AllCamaignsScreen from 'src/features/campgains/screens/AllCampaignsScreen';
+
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
     return (
         <Tab.Navigator screenOptions={{ headerShown: false }}>
-            <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Home" component={HomeScreen}
+                options={{
+                    tabBarLabel: 'Home',
+                    tabBarIcon: ({ color, size }) => (
+                        <Ionicons name="home" color={color} size={size} />
+                    ),
+                }}
+            />
+            <Tab.Screen name="Campgains" component={AllCamaignsScreen}
+                options={{
+                    tabBarLabel: 'Campgains',
+                    tabBarIcon: ({ color, size }) => (
+                        <AntDesign name="copy1" size={size} color={color} />
+                    ),
+                }}
+            />
         </Tab.Navigator>
     );
 }

@@ -1,14 +1,14 @@
 import React from 'react';
 import { Pressable, Text, StyleSheet } from 'react-native';
 import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
-import { GREEN_COLOR, GREY_COLOR } from 'src/shared/constants/colorConstants';
+import { PRIMARY_COLOR, GREY_COLOR } from 'src/shared/constants/colorConstants';
 
 function CustomButton({ onPress, title }) {
     return (
         <Pressable onPress={onPress} style={({ pressed }) => [
             styles.button,
             {
-                backgroundColor: pressed ? GREY_COLOR.light : GREEN_COLOR.main_lighter,
+                backgroundColor: pressed ? GREY_COLOR.light : PRIMARY_COLOR.main_lighter,
             }]} >
             <Text style={styles.buttontxt}>{title}</Text>
         </Pressable>
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     button: {
         display: 'flex',
         justifyContent: 'center',
-        backgroundColor: GREEN_COLOR.main_lighter,
+        backgroundColor: PRIMARY_COLOR.main_lighter,
         height: 50,
         borderRadius: 50
     },

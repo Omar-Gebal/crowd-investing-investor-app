@@ -1,7 +1,7 @@
 import { ActivityIndicator } from "react-native";
-function DefaultActivityIndicator() {
+function DefaultActivityIndicator({ color, isLarge }) {
     return (
-        <ActivityIndicator color={'white'} />
+        <ActivityIndicator color={color ?? 'white'} size={isLarge ? 'large' : 'small'} />
     );
 }
 

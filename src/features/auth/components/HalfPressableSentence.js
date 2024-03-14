@@ -1,5 +1,5 @@
 import { Text, TextInput, View, StyleSheet, Pressable } from "react-native";
-import { GREEN_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
+import { PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 
 function HalfPressableSentence({ onPress, part1, part2 }) {
@@ -8,7 +8,7 @@ function HalfPressableSentence({ onPress, part1, part2 }) {
             <Text style={styles.part1}>{`${part1} `}</Text>
             <Pressable onPress={onPress}>
                 {
-                    ({ pressed }) => <Text style={{ color: pressed ? GREY_COLOR.light : GREEN_COLOR.main_lighter, fontSize: FONT_SIZE.small }}>{`${part2}`}</Text>
+                    ({ pressed }) => <Text style={{ color: pressed ? GREY_COLOR.light : PRIMARY_COLOR.main_lighter, fontSize: FONT_SIZE.small }}>{`${part2}`}</Text>
                 }
             </Pressable>
         </View>

@@ -6,6 +6,7 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'https://crowd-investing-backend.onrender.com' }),
     // The "endpoints" represent operations and requests for this server
     endpoints: builder => ({
+        //auth
         signIn: builder.mutation({
             query: (userCredentials) => ({
                 url: '/auth/login',
@@ -19,8 +20,13 @@ export const apiSlice = createApi({
                 method: 'POST',
                 body: userCredentials
             })
+        }),
+        //campgains
+        getAllCampaigns: builder.query({
+            query: () => '/campaigns/'
         })
+
     })
 })
 
-export const { useSignInMutation, useSignUpMutation } = apiSlice
+export const { useSignInMutation, useSignUpMutation, useGetAllCampaignsQuery } = apiSlice
