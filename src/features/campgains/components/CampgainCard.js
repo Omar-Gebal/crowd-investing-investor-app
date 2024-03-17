@@ -1,34 +1,43 @@
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, StyleSheet, Text, Image, TouchableOpacity, Pressable } from 'react-native';
 import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
 import { GREY_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from 'src/shared/constants/colorConstants';
+import { useDispatch } from 'react-redux';
+import { setSelectedCampaign } from 'src/shared/state/campaignSlice';
 
-function CampaignCard({ campaign }) {
+function CampaignCard({ navigation, campaign }) {
+    const dispatch = useDispatch();
     return (
-        <View style={styles.campaignCard}>
-            <Image
-                source={{ uri: campaign.image_url }}
-                style={styles.campaignImage}
-                resizeMode="cover"
-            />
-            <View style={styles.campaignDetails}>
-                <Text style={styles.campaignName}>{campaign.name}</Text>
-                <View style={styles.progressContainer}>
-                    <View
-                        style={[
-                            styles.progressBar,
-                            { width: `${campaign.percent_complete}%` },
-                        ]}
-                    />
-                </View>
+        <Pressable onPress={() => {
+            dispatch(setSelectedCampaign(campaign));
+            navigation.navigate("CampaignDetails");
 
-                <Text style={styles.infoText}>
-                    Target: <Text style={styles.highlightedText}>${campaign.target.toLocaleString()}</Text>
-                </Text>
-                <Text style={styles.infoText}>
-                    Remaining Time: <Text style={styles.highlightedText}>{campaign.remaining_time}</Text>
-                </Text>
+        }}>
+            <View style={styles.campaignCard}>
+                <Image
+                    source={{ uri: campaign.image_url }}
+                    style={styles.campaignImage}
+                    resizeMode="cover"
+                />
+                <View style={styles.campaignDetails}>
+                    <Text style={styles.campaignName}>{campaign.name}</Text>
+                    <View style={styles.progressContainer}>
+                        <View
+                            style={[
+                                styles.progressBar,
+                                { width: `${campaign.percent_complete}%` },
+                            ]}
+                        />
+                    </View>
+
+                    <Text style={styles.infoText}>
+                        Target: <Text style={styles.highlightedText}>${campaign.target.toLocaleString()}</Text>
+                    </Text>
+                    <Text style={styles.infoText}>
+                        Remaining Time: <Text style={styles.highlightedText}>{campaign.remaining_time}</Text>
+                    </Text>
+                </View>
             </View>
-        </View>
+        </Pressable>
     );
 }
 

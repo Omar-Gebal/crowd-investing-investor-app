@@ -8,6 +8,7 @@ import CampaignCard from '../components/CampgainCard';
 function AllCamaignsScreen({ navigation }) {
     const { data, isLoading, error } = useGetAllCampaignsQuery();
 
+    const renderItem = ({ item }) => <CampaignCard campaign={item} navigation={navigation} />;
     if (error) {
         console.warn(error);
     }
@@ -20,7 +21,7 @@ function AllCamaignsScreen({ navigation }) {
                 ) : (
                     <FlatList
                         data={data?.campaigns || []}
-                        renderItem={(({ item }) => <CampaignCard campaign={item} />)}
+                        renderItem={renderItem}
                         keyExtractor={(item) => item.id.toString()}
                     />
                 )}

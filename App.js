@@ -9,8 +9,8 @@ import SignInScreen from 'src/features/auth/screens/SignInScreen';
 import SignUpScreen from 'src/features/auth/screens/SignUpScreen';
 import NewPasswordScreen from 'src/features/auth/screens/NewPasswordScreen';
 import ForgotPassScreen from 'src/features/auth/screens/ForgotPassScreen';
-import HomeScreen from 'src/features/home/screens/HomeScreen';
 import TabNavigator from 'src/shared/components/TabNavigator';
+import CampaignDetailsScreen from 'src/features/campgains/screens/CampgaignDetailsScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -23,6 +23,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='TabNavigator' component={TabNavigator} />
+            <Stack.Screen name='CampaignDetails' component={CampaignDetailsScreen} />
             <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
             <Stack.Screen name='ForgetPass' component={ForgotPassScreen} />
