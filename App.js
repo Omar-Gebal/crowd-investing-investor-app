@@ -23,7 +23,7 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='TabNavigator' component={TabNavigator} />
-            <Stack.Screen name='CampaignDetails' component={CampaignDetailsScreen} />
+            <Stack.Screen options={{ headerShown: true, title: 'Details' }} name='CampaignDetails' component={CampaignDetailsScreen} />
             <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
             <Stack.Screen name='ForgetPass' component={ForgotPassScreen} />

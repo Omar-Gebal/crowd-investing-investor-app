@@ -3,6 +3,7 @@ import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
 import { GREY_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from 'src/shared/constants/colorConstants';
 import { useDispatch } from 'react-redux';
 import { setSelectedCampaign } from 'src/shared/state/campaignSlice';
+import ProgressBar from './ProgressBar';
 
 function CampaignCard({ navigation, campaign }) {
     const dispatch = useDispatch();
@@ -20,15 +21,7 @@ function CampaignCard({ navigation, campaign }) {
                 />
                 <View style={styles.campaignDetails}>
                     <Text style={styles.campaignName}>{campaign.name}</Text>
-                    <View style={styles.progressContainer}>
-                        <View
-                            style={[
-                                styles.progressBar,
-                                { width: `${campaign.percent_complete}%` },
-                            ]}
-                        />
-                    </View>
-
+                    <ProgressBar percentComplete={campaign.percent_complete} />
                     <Text style={styles.infoText}>
                         Target: <Text style={styles.highlightedText}>${campaign.target.toLocaleString()}</Text>
                     </Text>

@@ -7,7 +7,8 @@ const PRIMARY_COLOR = {
 
 //blue
 const SECONDARY_COLOR = {
-    main: "#0093D2"
+    main: "#0093D2",
+    dark:"#003247"
 }
 
 const GREY_COLOR = {
