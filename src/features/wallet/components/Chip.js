@@ -3,15 +3,12 @@ import { Pressable, StyleSheet, Text } from 'react-native';
 import { GREY_COLOR, BLACK_COLOR } from 'src/shared/constants/colorConstants';
 import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
 
-function Chip({title, onPress}) {
-    const locked= useRef(false);
-
+function Chip({title, onPress, locked}) {
     
+    //console.log(title + " chip pressed "+ locked);
     return (
-    <Pressable onPress={onPress} style={({ pressed }) => [styles.container, locked.current && styles.containerPressed]} onPressIn={()=>locked.current= !locked.current} >
-        {({pressed}) => (
-        <Text style={[styles.titleStyle, locked.current && styles.titlePressedStyle]}>{title}</Text>
-        )}
+    <Pressable onPress={onPress} style={ [styles.container, locked && styles.containerPressed]}>
+        <Text style={[styles.titleStyle, locked && styles.titlePressedStyle]}>{title}</Text>
     </Pressable>
     );
     
@@ -24,8 +21,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         padding:20,
         paddingVertical:10,
-        margin: 10,
-        
+       
       },
       containerPressed:{
         backgroundColor:BLACK_COLOR.primary
