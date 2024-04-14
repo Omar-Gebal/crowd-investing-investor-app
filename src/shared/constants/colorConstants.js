@@ -22,6 +22,7 @@ const ERROR_COLOR = {
     light: "#E15C7A"
 }
 const BLACK_COLOR = {
+    primary:"#0d0c0c",
     secondary: "#1A1C1E"
 }
 

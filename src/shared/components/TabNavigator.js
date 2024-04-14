@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from 'src/features/home/screens/HomeScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 import AllCamaignsScreen from 'src/features/campgains/screens/AllCampaignsScreen';
+import WalletScreen from 'src/features/wallet/screens/WalletScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -14,7 +15,15 @@ export default function TabNavigator() {
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="home" color={color} size={size} />
+                        <Ionicons name="home"  size={size} color={color}/>
+                    ),
+                }}
+            />
+            <Tab.Screen name="Wallet" component={WalletScreen}
+                options={{
+                    tabBarLabel: 'Wallet',
+                    tabBarIcon: ({ color, size }) => (
+                        <Entypo name="wallet" size={size} color={color} />
                     ),
                 }}
             />
