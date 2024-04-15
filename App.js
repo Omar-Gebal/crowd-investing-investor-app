@@ -13,7 +13,6 @@ import TabNavigator from 'src/shared/components/TabNavigator';
 import CampaignDetailsScreen from 'src/features/campgains/screens/CampgaignDetailsScreen';
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
@@ -24,6 +23,7 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='TabNavigator' component={TabNavigator} />
+            <Stack.Screen name='TopUp' component={TabNavigator} />
             <Stack.Screen options={{ headerShown: true, title: 'Details' }} name='CampaignDetails' component={CampaignDetailsScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
             <Stack.Screen name='ForgetPass' component={ForgotPassScreen} />

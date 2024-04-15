@@ -4,18 +4,19 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import AllCamaignsScreen from 'src/features/campgains/screens/AllCampaignsScreen';
 import WalletScreen from 'src/features/wallet/screens/WalletScreen';
+import { PRIMARY_COLOR } from '../constants/colorConstants';
 
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
     return (
-        <Tab.Navigator screenOptions={{ headerShown: false }}>
+        <Tab.Navigator screenOptions={{ headerShown: false, tabBarActiveTintColor: PRIMARY_COLOR.main }}>
             <Tab.Screen name="Home" component={HomeScreen}
                 options={{
                     tabBarLabel: 'Home',
                     tabBarIcon: ({ color, size }) => (
-                        <Ionicons name="home"  size={size} color={color}/>
+                        <Ionicons name="home" size={size} color={color} />
                     ),
                 }}
             />
