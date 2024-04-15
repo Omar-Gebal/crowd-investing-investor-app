@@ -11,6 +11,7 @@ import NewPasswordScreen from 'src/features/auth/screens/NewPasswordScreen';
 import ForgotPassScreen from 'src/features/auth/screens/ForgotPassScreen';
 import TabNavigator from 'src/shared/components/TabNavigator';
 import CampaignDetailsScreen from 'src/features/campgains/screens/CampgaignDetailsScreen';
+import BuySharesScreen from 'src/features/campgains/screens/BuySharesScreen';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,10 +25,12 @@ export default function App() {
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name='TabNavigator' component={TabNavigator} />
             <Stack.Screen options={{ headerShown: true, title: 'Details' }} name='CampaignDetails' component={CampaignDetailsScreen} />
+            <Stack.Screen options={{ headerShown: true, title: 'Buy Shares' }} name='BuyShares' component={BuySharesScreen} />
             <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
             <Stack.Screen name='ForgetPass' component={ForgotPassScreen} />
             <Stack.Screen name='NewPassword' component={NewPasswordScreen} />
+            
 
           </Stack.Navigator>
 
