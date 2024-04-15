@@ -1,7 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    selectedCampaign: null,
+    selectedCampaign: {
+        start_time: null
+    },
 };
 
 const campaignSlice = createSlice({

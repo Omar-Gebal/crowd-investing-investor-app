@@ -23,7 +23,7 @@ function CampaignDetailsScreen({ navigation }) {
                 <Text style={styles.sectionTitle}>Description</Text>
                 <Text>{selectedCampaign.description}</Text>
                 <DefaultVerticalSpacing />
-                <CustomButton title={"Buy shares"} />
+                <CustomButton title={"Buy shares"}  onPress={()=>navigation.navigate("BuyShares")}/>
                 <DefaultVerticalSpacing />
                 <Text style={styles.sectionTitle}>Campaign Progress</Text>
                 <ProgressBar percentComplete={selectedCampaign.percent_complete} />
@@ -33,7 +33,6 @@ function CampaignDetailsScreen({ navigation }) {
                             Amount Invested: <HighlightedText text={`$${selectedCampaign.amount_invested.toLocaleString()}`} />
                         </Text>
                         <Text>
-
                             Percentage complete: <HighlightedText text={`${selectedCampaign.percent_complete}%`} />
                         </Text>
                     </View>

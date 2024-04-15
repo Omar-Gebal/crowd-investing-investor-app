@@ -38,6 +38,19 @@ export const apiSlice = createApi({
         getAllCampaigns: builder.query({
             query: () => '/campaigns/'
         }),
+        getCampaign: builder.query({
+            query: ({ campaign_id }) => `/campaigns/${campaign_id}`
+        }),
+        buyShares: builder.mutation({
+            query: ({ campaign_id, accessToken, body }) => ({
+                url: `/campaigns/${campaign_id}/participate`,
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${accessToken}`
+                },
+                body: body
+            })
+        }),
     })
 })
 
@@ -45,5 +58,7 @@ export const {
     useSignInMutation,
     useSignUpMutation,
     useGetLoggedInUserQuery,
-    useGetAllCampaignsQuery
+    useGetAllCampaignsQuery,
+    useGetCampaignQuery,
+    useBuySharesMutation
 } = apiSlice
