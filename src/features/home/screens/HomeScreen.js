@@ -3,9 +3,42 @@ import CustomSafeArea from "src/shared/components/CustomSafeArea";
 import { BLACK_COLOR, ERROR_COLOR, PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 import { Entypo, Fontisto, AntDesign } from '@expo/vector-icons';
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
-import { LineChart } from 'react-native-chart-kit'
+import { LineChart } from 'react-native-chart-kit';
+import Carousel from 'react-native-reanimated-carousel';
+import CampaignCard from "../components/CampaignCard";
+import { useState } from "react";
+
 
 export default function HomeScreen() {
+    const [currentCampaignBeingDisplayed, setCurrentCampaignBeingDisplayed] =useState({});
+    const fakeData= [
+        {
+            img:"https://pathmonk.com/wp-content/uploads/2024/01/best-startup-marketing-campaigns-1024x585.png",
+            campaignTitle:"Free Buisness Education",
+            sharesBought:10,
+        },
+        {
+            img:"https://cdn.britannica.com/74/190774-131-CC3FEB1F/jeans-denim-pants-clothing.jpg",
+            campaignTitle:"Low Waisted Pants Shop",
+            sharesBought: "All shares",
+        },
+        {
+            img:"https://i.etsystatic.com/11931609/r/il/7c1191/1091679622/il_570xN.1091679622_ggrp.jpg",
+            campaignTitle:"Crystal Jewlery Shop",
+            sharesBought: 30,
+        },
+        {
+            img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcj3h0gMQw65xbDcE-RibsElSyU6Zz9pDRqzCiWlMqoA&s",
+            campaignTitle:"Car at your Door Co",
+            sharesBought: 1,
+        },
+        {
+            img:"https://store-images.s-microsoft.com/image/apps.56161.9007199266246365.1d5a6a53-3c49-4f80-95d7-78d76b0e05d0.a3e87fea-e03e-4c0a-8f26-9ecef205fa7b",
+            campaignTitle:"Watch with Ease",
+            sharesBought: 1,
+        }
+        
+    ]
 
     const user = {
         name: "Ali Husni",
@@ -25,6 +58,13 @@ export default function HomeScreen() {
         ],
     };
     var graphWidth;
+
+    function changeCampaignBeingDisplayed(index){
+        setCurrentCampaignBeingDisplayed(fakeData[index]);
+        console.log(currentCampaignBeingDisplayed);
+    }
+
+
     return (
         <CustomSafeArea style={{ backgroundColor: PRIMARY_COLOR.main }}>
             <View style={styles.topContainer}>
@@ -87,7 +127,29 @@ export default function HomeScreen() {
                     />
                 </View>
             </View>
-
+            <View style={styles.carouselView}>
+                <View style={styles.titleView}>
+                    <Text style={styles.recentTxtStyle}>Your Shares: </Text>
+                </View>
+                    <Carousel
+                        loop
+                        width={Dimensions.get("screen").width}
+                        height={200}
+                        mode="parallax"
+                        modeConfig={{
+                            parallaxScrollingScale: 0.8,
+                            parallaxScrollingOffset: 150,
+                          }}
+                        data={fakeData}
+                        scrollAnimationDuration={2000}
+                        onSnapToItem={(index ) => changeCampaignBeingDisplayed(index)}
+                        renderItem={({ item, index }) => (
+                            <CampaignCard imgUri={item.img}/>
+                        )}
+                    />
+                    <Text style={styles.titleTxtStyle}>{currentCampaignBeingDisplayed.campaignTitle}</Text>
+                    <Text style={styles.sharesBoughtTxtStyle}>You Bought:{currentCampaignBeingDisplayed.sharesBought} shares</Text>
+                </View>
         </CustomSafeArea>
     );
 }
@@ -99,10 +161,10 @@ const styles = StyleSheet.create({
         paddingTop: 24.5
     },
     lowerContainer: {
-        backgroundColor: GREY_COLOR.lightest,
+        backgroundColor:GREY_COLOR.lightest,
         paddingHorizontal: '5%',
-        flex: 1
-
+        
+ 
     },
     headerBar: {
         display: "flex",
@@ -221,6 +283,29 @@ const styles = StyleSheet.create({
     lineGraph: {
         position: "relative",
         left: -20
+    },
+    carouselView:{
+        justifyContent:"flex-start",
+        alignItems:"center",
+        backgroundColor:GREY_COLOR.lightest,
+        flex:1
+    },
+    titleTxtStyle:{
+        fontSize:FONT_SIZE.medium,
+        fontWeight:"bold"
+    },
+    sharesBoughtTxtStyle:{
+        fontSize:FONT_SIZE.medium,
+        color:GREY_COLOR.medium
+    },
+    recentTxtStyle:{
+        color:PRIMARY_COLOR.dark,
+        fontWeight:"bold",
+        fontSize:FONT_SIZE.medium,
+    },
+    titleView:{
+        width:"100%",
+        paddingHorizontal:"5%"
     }
 
 });
