@@ -14,5 +14,5 @@ const campaignSlice = createSlice({
     },
 });
 
-export const { setSelectedCampaign, clearSelectedCampaign } = campaignSlice.actions;
+export const { setSelectedCampaign } = campaignSlice.actions;
 export default campaignSlice.reducer;

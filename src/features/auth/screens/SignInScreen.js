@@ -12,11 +12,13 @@ import AuthPageHeader from "../components/AuthPageHeader";
 import { useSignInMutation } from "src/shared/state/api/apiSlice";
 import DefaultVerticalSpacing from "../components/DefaultVerticalSpacing";
 import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
+import { useDispatch } from "react-redux";
+import { setAccessToken } from "src/shared/state/userSlice";
 
 function SignInScreen({ navigation }) {
 
     const [signIn, { isLoading, error }] = useSignInMutation();
-
+    const dispatch = useDispatch();
 
 
     function forgotPassFn() {
@@ -33,7 +35,9 @@ function SignInScreen({ navigation }) {
     async function handleSignIn(data) {
         const response = await signIn(data);
         if ('data' in response) {
-            navigation.replace('Home');
+            // console.log();
+            dispatch(setAccessToken(response.data.access_token));
+            navigation.replace('TabNavigator');
         }
     }
 
