@@ -66,7 +66,7 @@ export default function HomeScreen() {
 
 
     return (
-        <CustomSafeArea style={{ backgroundColor: PRIMARY_COLOR.main }}>
+        <CustomSafeArea backgroundColor={PRIMARY_COLOR.main}>
             <View style={styles.topContainer}>
                 <View style={styles.headerBar}>
                     <View style={styles.greetingContainer}>
