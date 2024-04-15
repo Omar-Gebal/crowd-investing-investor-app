@@ -14,8 +14,11 @@ const numPadSlice = createSlice({
         removeNumber: (state) => {
             state.number = state.number.slice(0, -1);
         },
+        clearNumber: (state) => {
+            state.number = '';
+        },
     },
 });
 
-export const { concatNumber, removeNumber} = numPadSlice.actions;
+export const { concatNumber, removeNumber, clearNumber } = numPadSlice.actions;
 export default numPadSlice.reducer;

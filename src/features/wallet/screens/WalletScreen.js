@@ -14,14 +14,14 @@ import { CURRENCY } from "src/shared/constants/dataConstants";
 import { separateDateTime } from "src/shared/utils/converters";
 import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
 
-function WalletScreen(props) {
+function WalletScreen({ navigation }) {
     const [currentList, setCurrentList] = useState("all");
     const accessToken = useSelector((state) => state.user.accessToken);
     const hidden = useSelector((state) => state.user.amountsHidden);
     const userData = useSelector((state) => state.user.userData)
     const dispatch = useDispatch();
 
-    const { data, isLoading, error } = useGetLoggedInUserQuery(accessToken);
+    const { data, isLoading } = useGetLoggedInUserQuery(accessToken);
     useEffect(() => {
         if (data) {
             dispatch(setUserData(data));
@@ -50,7 +50,7 @@ function WalletScreen(props) {
                     <Text style={{ fontWeight: "bold", fontSize: FONT_SIZE.large, color: "white" }}>{hidden ? 'XXXX' : userData.wallet_amount} {CURRENCY}</Text>
                 </View>
                 <View style={styles.block}>
-                    <BlockOfActions />
+                    <BlockOfActions navigation={navigation} />
                 </View>
                 <View style={styles.bottomPart}>
                     <View style={styles.middleStrip}>
