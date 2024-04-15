@@ -27,7 +27,6 @@ export default function App() {
             <Stack.Screen name='TopUp' component={TabNavigator} />
             <Stack.Screen options={{ headerShown: true, title: 'Details' }} name='CampaignDetails' component={CampaignDetailsScreen} />
             <Stack.Screen options={{ headerShown: true, title: 'Buy Shares' }} name='BuyShares' component={BuySharesScreen} />
-            <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
             <Stack.Screen name='ForgetPass' component={ForgotPassScreen} />
             <Stack.Screen name='NewPassword' component={NewPasswordScreen} />

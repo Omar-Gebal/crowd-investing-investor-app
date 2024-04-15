@@ -12,11 +12,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUserData } from "src/shared/state/userSlice";
 import { CURRENCY } from "src/shared/constants/dataConstants";
 import { separateDateTime } from "src/shared/utils/converters";
+import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
 
 function WalletScreen(props) {
     const [currentList, setCurrentList] = useState("all");
     const accessToken = useSelector((state) => state.user.accessToken);
     const hidden = useSelector((state) => state.user.amountsHidden);
+    const userData = useSelector((state) => state.user.userData)
     const dispatch = useDispatch();
 
     const { data, isLoading, error } = useGetLoggedInUserQuery(accessToken);
@@ -45,7 +47,7 @@ function WalletScreen(props) {
             <View style={styles.container}>
                 <View style={styles.topPart}>
                     <Text style={{ fontSize: FONT_SIZE.small, color: "white" }}>Available balance</Text>
-                    <Text style={{ fontWeight: "bold", fontSize: FONT_SIZE.large, color: "white" }}>{hidden ? 'XXXX' : data && data.wallet_amount} {CURRENCY}</Text>
+                    <Text style={{ fontWeight: "bold", fontSize: FONT_SIZE.large, color: "white" }}>{hidden ? 'XXXX' : userData.wallet_amount} {CURRENCY}</Text>
                 </View>
                 <View style={styles.block}>
                     <BlockOfActions />
@@ -64,12 +66,13 @@ function WalletScreen(props) {
                     <View style={styles.listView}>
                         {data &&
                             <FlatList
-                                data={data.wallet_activities}
+                                data={userData.wallet_activities}
                                 renderItem={renderItem}
                                 style={styles.flatListStyle}
                                 ListFooterComponent={<View style={{ height: 550, backgroundColor: "white" }} />}
                             />
                         }
+                        {isLoading && <DefaultActivityIndicator color={PRIMARY_COLOR.main} />}
 
                     </View>
                 </View>
