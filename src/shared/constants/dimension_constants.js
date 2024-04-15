@@ -3,7 +3,11 @@ const FONT_SIZE = {
     medium: 18,
     large: 26
 }
+const MARGINS = {
+    small: 5,
+    medium: 10,
+    large: 20
+}
 
 
-
-export { FONT_SIZE }; 
+export { FONT_SIZE, MARGINS }; 

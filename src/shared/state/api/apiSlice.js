@@ -21,12 +21,29 @@ export const apiSlice = createApi({
                 body: userCredentials
             })
         }),
+
+        getLoggedInUser: builder.query({
+            query: (accessToken) => ({
+                url: '/investors/me',
+                method: 'GET',
+                headers: {
+                    authorization: `Bearer ${accessToken}`
+                }
+
+            })
+
+        }),
+
         //campgains
         getAllCampaigns: builder.query({
             query: () => '/campaigns/'
-        })
-
+        }),
     })
 })
 
-export const { useSignInMutation, useSignUpMutation, useGetAllCampaignsQuery } = apiSlice
+export const {
+    useSignInMutation,
+    useSignUpMutation,
+    useGetLoggedInUserQuery,
+    useGetAllCampaignsQuery
+} = apiSlice
