@@ -63,6 +63,16 @@ export const apiSlice = createApi({
                 body: body
             })
         }),
+        withdrawWallet: builder.mutation({
+            query: ({ accessToken, body }) => ({
+                url: `/investors/me/wallet/withdraw`,
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${accessToken}`
+                },
+                body: body
+            })
+        }),
     })
 })
 
@@ -73,5 +83,6 @@ export const {
     useGetAllCampaignsQuery,
     useGetCampaignQuery,
     useBuySharesMutation,
-    useTopUpWalletMutation
+    useTopUpWalletMutation,
+    useWithdrawWalletMutation
 } = apiSlice

@@ -11,17 +11,13 @@ function BlockOfActions({ navigation }) {
     const hidden = useSelector((state) => state.user.amountsHidden);
 
 
-    function withdraw() {
-        console.log("withdraw pressed");
-    }
-
     function Hide() {
         dispatch(setAmountsHidden(!hidden))
     }
     return (
         <View style={styles.container}>
             <ActionButton icon={<AntDesign name="pluscircle" size={50} color={"white"} />} text="top up" onPress={() => navigation.navigate('TopUp')} />
-            <ActionButton icon={<AntDesign name="minuscircleo" size={50} color={"white"} />} text="withdraw" onPress={withdraw} />
+            <ActionButton icon={<AntDesign name="minuscircleo" size={50} color={"white"} />} text="withdraw" onPress={() => navigation.navigate('Withdraw')} />
             {hidden ? <ActionButton icon={<Feather name="eye-off" size={50} color={"white"} />} text="Hide" onPress={Hide} /> : <ActionButton icon={<Feather name="eye" size={50} color={"white"} />} text="Hide" onPress={Hide} />}
         </View>
     );

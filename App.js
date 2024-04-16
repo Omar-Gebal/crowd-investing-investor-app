@@ -13,6 +13,7 @@ import TabNavigator from 'src/shared/components/TabNavigator';
 import CampaignDetailsScreen from 'src/features/campgains/screens/CampgaignDetailsScreen';
 import BuySharesScreen from 'src/features/campgains/screens/BuySharesScreen';
 import TopUpScreen from 'src/features/wallet/screens/TopUpScreen';
+import WithdrawScreen from 'src/features/wallet/screens/WithdrawScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ export default function App() {
             <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='TabNavigator' component={TabNavigator} />
             <Stack.Screen options={{ headerShown: true, title: 'Top up wallet' }} name='TopUp' component={TopUpScreen} />
+            <Stack.Screen options={{ headerShown: true, title: 'Withdraw from wallet' }} name='Withdraw' component={WithdrawScreen} />
             <Stack.Screen options={{ headerShown: true, title: 'Details' }} name='CampaignDetails' component={CampaignDetailsScreen} />
             <Stack.Screen options={{ headerShown: true, title: 'Buy Shares' }} name='BuyShares' component={BuySharesScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />

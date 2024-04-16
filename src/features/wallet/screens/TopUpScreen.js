@@ -33,7 +33,7 @@ function TopUpScreen(props) {
     useEffect(() => {
         dispatch(clearNumber());
     }, []);
-    return (
+    return (<>
         <View style={styles.mainContainer}>
             <View style={styles.top}>
                 <Text style={styles.mainText}>How much balance do you want to add to your wallet ?</Text>
@@ -41,8 +41,9 @@ function TopUpScreen(props) {
                 <CustomButton title={isLoading ? <DefaultActivityIndicator /> : "Confirm"} onPress={handleTopUp} />
             </View>
 
-            <NumberPad />
         </View>
+        <NumberPad />
+    </>
     );
 
 }
