@@ -3,7 +3,7 @@ import CustomSafeArea from 'src/shared/components/CustomSafeArea';
 import DefaultActivityIndicator from 'src/shared/components/DefaultActivityIndicator';
 import { PRIMARY_COLOR, SECONDARY_COLOR } from 'src/shared/constants/colorConstants';
 import { useGetAllCampaignsQuery } from 'src/shared/state/api/apiSlice';
-import CampaignCard from '../components/CampgainCard';
+import CampaignCard from '../components/CampaignCard';
 
 function AllCamaignsScreen({ navigation }) {
     const { data, isLoading, error } = useGetAllCampaignsQuery();

@@ -8,7 +8,7 @@ function CustomButton({ onPress, title }) {
         <Pressable onPress={onPress} style={({ pressed }) => [
             styles.button,
             {
-                backgroundColor: pressed ? GREY_COLOR.light : PRIMARY_COLOR.main_lighter,
+                backgroundColor: pressed ? GREY_COLOR.light : PRIMARY_COLOR.main,
             }]} >
             <Text style={styles.buttontxt}>{title}</Text>
         </Pressable>
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     button: {
         display: 'flex',
         justifyContent: 'center',
-        backgroundColor: PRIMARY_COLOR.main_lighter,
+        backgroundColor: PRIMARY_COLOR.main,
         height: 50,
         borderRadius: 50
     },

@@ -38,6 +38,41 @@ export const apiSlice = createApi({
         getAllCampaigns: builder.query({
             query: () => '/campaigns/'
         }),
+        getCampaign: builder.query({
+            query: (campaign_id) => `/campaigns/${campaign_id}`
+        }),
+        buyShares: builder.mutation({
+            query: ({ campaign_id, accessToken, body }) => ({
+                url: `/campaigns/${campaign_id}/participate`,
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${accessToken}`
+                },
+                body: body
+            })
+        }),
+
+        //wallet
+        topUpWallet: builder.mutation({
+            query: ({ accessToken, body }) => ({
+                url: `/investors/me/wallet/topup`,
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${accessToken}`
+                },
+                body: body
+            })
+        }),
+        withdrawWallet: builder.mutation({
+            query: ({ accessToken, body }) => ({
+                url: `/investors/me/wallet/withdraw`,
+                method: 'POST',
+                headers: {
+                    authorization: `Bearer ${accessToken}`
+                },
+                body: body
+            })
+        }),
     })
 })
 
@@ -45,5 +80,9 @@ export const {
     useSignInMutation,
     useSignUpMutation,
     useGetLoggedInUserQuery,
-    useGetAllCampaignsQuery
+    useGetAllCampaignsQuery,
+    useGetCampaignQuery,
+    useBuySharesMutation,
+    useTopUpWalletMutation,
+    useWithdrawWalletMutation
 } = apiSlice

@@ -4,7 +4,7 @@ import { PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 
 
 
-function CustomInput({ control, name, placeholder, secureTextEntry, rules }) {
+function CustomInput({ control, name, placeholder, secureTextEntry, rules, keyboardType }) {
     return (
         <Controller
             control={control}
@@ -17,7 +17,9 @@ function CustomInput({ control, name, placeholder, secureTextEntry, rules }) {
                         onChangeText={onChange}
                         onBlur={onBlur}
                         placeholder={placeholder}
-                        secureTextEntry={secureTextEntry} />
+                        secureTextEntry={secureTextEntry}
+                        keyboardType={keyboardType}
+                    />
                 </View>
             )}
         />

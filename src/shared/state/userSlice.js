@@ -1,7 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    userData: null,
+    userData: {
+        wallet_amount: null,
+        wallet_activities: [],
+    },
     accessToken: null,
     amountsHidden: false,
 };
