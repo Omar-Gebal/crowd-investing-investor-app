@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: "5%",
         paddingTop: 90,                     //not dynamic based on the height size of the ActionBox
         backgroundColor: "white",
-
+        position:"relative",
         borderTopLeftRadius: 50,             //what does borderTopEndRadius do?
         borderTopRightRadius: 50,
         gap: 10

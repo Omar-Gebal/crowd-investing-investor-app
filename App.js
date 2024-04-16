@@ -21,8 +21,8 @@ export default function App() {
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='TabNavigator' component={TabNavigator} />
+            <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='TopUp' component={TabNavigator} />
             <Stack.Screen options={{ headerShown: true, title: 'Details' }} name='CampaignDetails' component={CampaignDetailsScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />

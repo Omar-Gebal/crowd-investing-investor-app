@@ -163,7 +163,6 @@ const styles = StyleSheet.create({
     lowerContainer: {
         backgroundColor:GREY_COLOR.lightest,
         paddingHorizontal: '5%',
-        
  
     },
     headerBar: {
