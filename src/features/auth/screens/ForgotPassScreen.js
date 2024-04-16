@@ -35,7 +35,7 @@ export default function ForgotPassScreen({ navigation }) {
 
     const fieldRequiredError = 'This field is required'
     return (
-        <CustomSafeArea>
+        <CustomSafeArea backgroundColor="white">
             <View style={styles.container}>
                 <AuthPageHeader title={'Forgot Password'} subtitle={'Enter your email account to reset your password'} />
                 <View style={styles.formView}>
@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#0000',
         paddingHorizontal: '5%',              //add to constants later
         height: '100%',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
+        backgroundColor:"white"
     },
     formView: {
         paddingBottom: '5%',                  //add to constants later

@@ -31,9 +31,8 @@ export default function App() {
             <Stack.Screen options={{ headerShown: true, title: 'Details' }} name='CampaignDetails' component={CampaignDetailsScreen} />
             <Stack.Screen options={{ headerShown: true, title: 'Buy Shares' }} name='BuyShares' component={BuySharesScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
-            <Stack.Screen name='ForgetPass' component={ForgotPassScreen} />
+            <Stack.Screen options={{ headerShown: true, title: 'Go Back' }} name='ForgetPass' component={ForgotPassScreen} />
             <Stack.Screen name='NewPassword' component={NewPasswordScreen} />
-
 
           </Stack.Navigator>
 

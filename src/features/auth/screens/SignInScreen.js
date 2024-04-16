@@ -50,9 +50,8 @@ function SignInScreen({ navigation }) {
 
     const fieldRequiredError = 'This field is required'
     return (
-        <CustomSafeArea>
+        <CustomSafeArea backgroundColor="white">
             <View style={styles.container}>
-
                 <AuthPageHeader title={'Sign in to your account'} subtitle={'Please enter your credentials'} />
                 <DefaultVerticalSpacing />
                 <View style={styles.formView}>
@@ -78,6 +77,7 @@ function SignInScreen({ navigation }) {
                             name="password"
                             placeholder="Password"
                             control={control}
+                            secureTextEntry={true}
                             rules={
                                 {
                                     required: fieldRequiredError,
@@ -85,7 +85,7 @@ function SignInScreen({ navigation }) {
                             }
                         />
                         {errors.password && <FormErrorText text={errors.password.message} />}
-                        <Pressable onPress={forgotPassFn}>
+                        <Pressable onPress={forgotPassFn} style={styles.forgotPassTxtStyle}>
                             {({ pressed }) =>
                                 <Text style={{
                                     color: pressed ? GREY_COLOR.light : PRIMARY_COLOR.main_lighter,
@@ -127,6 +127,9 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'flex-end'
     },
+    forgotPassTxtStyle:{
+        marginTop:10
+    }
 
 })
 
