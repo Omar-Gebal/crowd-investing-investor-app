@@ -22,6 +22,8 @@ function BuySharesScreen({ navigation }) {
 
     const dispatch = useDispatch();
     const [buyShares, { isLoading, error }] = useBuySharesMutation();
+    const { data: updatedCampaign, refetch } = useGetCampaignQuery(selectedCampaign.id);
+
     async function handleBuyShare() {
         const response = await buyShares({
             accessToken,
@@ -32,11 +34,17 @@ function BuySharesScreen({ navigation }) {
         });
         if ('data' in response) {
             dispatch(setUserData(response.data));
-            navigation.navigate('TabNavigator')
+            refetch();
         }
     }
 
 
+    useEffect(() => {
+        console.log('haha')
+        if (updatedCampaign) {
+            dispatch(setSelectedCampaign(updatedCampaign));
+        }
+    }, [updatedCampaign]);
 
     //hydration
     const { data: loggedInUser } = useGetLoggedInUserQuery(accessToken);
