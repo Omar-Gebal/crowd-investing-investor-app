@@ -43,7 +43,7 @@ function WalletScreen({ navigation }) {
         console.log("View Request Pressed");
     }
     return (
-        <CustomSafeArea>
+        <CustomSafeArea backgroundColor={PRIMARY_COLOR.main}>
             <View style={styles.container}>
                 <View style={styles.topPart}>
                     <Text style={{ fontSize: FONT_SIZE.small, color: "white" }}>Available balance</Text>
@@ -84,19 +84,19 @@ function WalletScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        backgroundColor: PRIMARY_COLOR.dark,
+        backgroundColor: PRIMARY_COLOR.main,
     },
     topPart: {
         paddingHorizontal: "5%",
         paddingTop: 20,
         paddingBottom: 60,
-        backgroundColor: PRIMARY_COLOR.dark
+        backgroundColor: PRIMARY_COLOR.main
     },
     bottomPart: {
         paddingHorizontal: "5%",
         paddingTop: 90,                     //not dynamic based on the height size of the ActionBox
         backgroundColor: "white",
-        position:"relative",
+        position: "relative",
         borderTopLeftRadius: 50,             //what does borderTopEndRadius do?
         borderTopRightRadius: 50,
         gap: 10

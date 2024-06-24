@@ -10,18 +10,37 @@ import DefaultVerticalSpacing from '../components/DefaultVerticalSpacing';
 import { emailRegexPattern, passwordRegexPattern } from 'src/shared/utils/validators';
 import FormErrorText from '../components/FormErrorText';
 import { useSignUpMutation } from 'src/shared/state/api/apiSlice';
+import { dispatchCommand } from 'react-native-reanimated';
+import { setAccessToken, setUserData } from 'src/shared/state/userSlice';
+import DefaultActivityIndicator from 'src/shared/components/DefaultActivityIndicator';
+import { useDispatch } from 'react-redux';
 
 function SignUpScreen({ navigation }) {
     const [signUp, { isLoading, error }] = useSignUpMutation();
-
+    const dispatch = useDispatch();
     async function handleSignUp(data) {
-        const response = await signUp(data);
+        const response = await signUp({
+            first_name: data.first_name,
+            last_name: data.last_name,
+            email: data.email,
+            password: data.password,
+            phone_number: data.phone_number,
+            date_of_birth: "2019-08-24",
+            gender: "string"
+        });
+        console.log(response);
+        if ('data' in response) {
+            dispatch(setAccessToken(response.data.access_token));
+            dispatch(setUserData(response.data.investor));
+            navigation.replace('TabNavigator');
+        }
     }
 
     const { control, handleSubmit, formState: { errors }, watch } = useForm({
         defaultValues: {
             first_name: '',
             last_name: '',
+            phone_number: '',
             email: '',
             password: '',
             repeat_password: '',
@@ -31,7 +50,7 @@ function SignUpScreen({ navigation }) {
     const password = watch('password');
 
     return (
-        <CustomSafeArea >
+        <CustomSafeArea backgroundColor={'white'}>
             <ScrollView >
                 <View style={styles.screenWrapper}>
                     <AuthPageHeader title={'Sign up'} subtitle={'Create a new account'} />
@@ -67,7 +86,6 @@ function SignUpScreen({ navigation }) {
                         rules={
                             {
                                 required: fieldRequiredError,
-                                required: fieldRequiredError,
                                 pattern: {
                                     value: emailRegexPattern,
                                     message: 'Email format invalid'
@@ -76,6 +94,19 @@ function SignUpScreen({ navigation }) {
                         }
                     />
                     {errors.email && <FormErrorText text={errors.email.message} />}
+                    <DefaultVerticalSpacing />
+                    <CustomInput
+                        name="phone_number"
+                        placeholder="Phone number"
+                        keyboardType={'numeric'}
+                        control={control}
+                        rules={
+                            {
+                                required: fieldRequiredError,
+                            }
+                        }
+                    />
+                    {errors.phone_number && <FormErrorText text={errors.phone_number.message} />}
                     <DefaultVerticalSpacing />
                     <CustomInput
                         name="password"
@@ -109,7 +140,7 @@ function SignUpScreen({ navigation }) {
                     {errors.repeat_password && <FormErrorText text={errors.repeat_password.message} />}
 
                     <DefaultVerticalSpacing />
-                    <CustomButton onPress={handleSubmit(handleSignUp)} title="Create account" />
+                    <CustomButton onPress={handleSubmit(handleSignUp)} title={isLoading ? <DefaultActivityIndicator /> : "Create account"} />
                     <HalfPressableSentence part1={'Already have an account?'} part2={'Sign In'} onPress={() => navigation.navigate("SignIn")} />
                 </View>
             </ScrollView>

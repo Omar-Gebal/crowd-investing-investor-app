@@ -12,6 +12,7 @@ import { setUserData } from 'src/shared/state/userSlice';
 import { useBuySharesMutation, useGetCampaignQuery, useGetLoggedInUserQuery } from 'src/shared/state/api/apiSlice';
 import DefaultActivityIndicator from 'src/shared/components/DefaultActivityIndicator';
 import { setSelectedCampaign } from 'src/shared/state/campaignSlice';
+import { clearNumber } from 'src/shared/state/numPadSlice';
 
 
 function BuySharesScreen({ navigation }) {
@@ -38,7 +39,6 @@ function BuySharesScreen({ navigation }) {
         }
     }
 
-
     useEffect(() => {
         console.log('haha')
         if (updatedCampaign) {
@@ -47,18 +47,26 @@ function BuySharesScreen({ navigation }) {
     }, [updatedCampaign]);
 
     //hydration
-    const { data: loggedInUser } = useGetLoggedInUserQuery(accessToken);
+    const { data: loggedInUser, refetch: refetchUser } = useGetLoggedInUserQuery(accessToken);
     useEffect(() => {
         if (loggedInUser) {
+            console.log(loggedInUser);
             dispatch(setUserData(loggedInUser));
         }
     }, [loggedInUser]);
 
+    useEffect(() => {
+        const unsubscribe = navigation.addListener("focus", () => {
+            refetchUser();
+            dispatch(clearNumber());
+        });
+        return unsubscribe;
+    }, [navigation, refetchUser]);
 
     return (
         <View style={styles.container}>
             <View style={styles.top}>
-                <Text style={styles.titleStyle}>BUY <Text style={styles.highlighted}>{selectedCampaign.name}</Text> </Text>
+                <Text style={styles.titleStyle}>Buy shares in <Text style={styles.highlighted}>{selectedCampaign.name}</Text></Text>
                 <Text style={styles.amtOfSharesStyle}>{selectedCampaign.remaining_shares} shares available</Text>
                 <View style={styles.sharesView}>
                     <Text></Text>
@@ -82,7 +90,9 @@ const styles = StyleSheet.create({
     titleStyle: {
         fontWeight: "bold",
         fontSize: FONT_SIZE.large,
-        marginBottom: MARGINS.small
+        marginBottom: MARGINS.small,
+        alignSelf: 'center',
+        textAlign: 'center'
     },
     balanceTxtStyle: {
         fontWeight: "bold",
@@ -115,7 +125,7 @@ const styles = StyleSheet.create({
     top: {
         paddingTop: 20,
         paddingHorizontal: "15%",
-        paddingBottom: 60
+        paddingBottom: 20
 
     },
     bottom: {

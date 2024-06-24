@@ -6,39 +6,55 @@ import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 import { LineChart } from 'react-native-chart-kit';
 import Carousel from 'react-native-reanimated-carousel';
 import CampaignCard from "../components/CampaignCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useGetLoggedInUserQuery } from "src/shared/state/api/apiSlice";
+import { setUserData } from "src/shared/state/userSlice";
+import { CURRENCY } from "src/shared/constants/dataConstants";
 
 
 export default function HomeScreen() {
-    const [currentCampaignBeingDisplayed, setCurrentCampaignBeingDisplayed] =useState({});
-    const fakeData= [
-        {
-            img:"https://pathmonk.com/wp-content/uploads/2024/01/best-startup-marketing-campaigns-1024x585.png",
-            campaignTitle:"Free Buisness Education",
-            sharesBought:10,
-        },
-        {
-            img:"https://cdn.britannica.com/74/190774-131-CC3FEB1F/jeans-denim-pants-clothing.jpg",
-            campaignTitle:"Low Waisted Pants Shop",
-            sharesBought: "All shares",
-        },
-        {
-            img:"https://i.etsystatic.com/11931609/r/il/7c1191/1091679622/il_570xN.1091679622_ggrp.jpg",
-            campaignTitle:"Crystal Jewlery Shop",
-            sharesBought: 30,
-        },
-        {
-            img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcj3h0gMQw65xbDcE-RibsElSyU6Zz9pDRqzCiWlMqoA&s",
-            campaignTitle:"Car at your Door Co",
-            sharesBought: 1,
-        },
-        {
-            img:"https://store-images.s-microsoft.com/image/apps.56161.9007199266246365.1d5a6a53-3c49-4f80-95d7-78d76b0e05d0.a3e87fea-e03e-4c0a-8f26-9ecef205fa7b",
-            campaignTitle:"Watch with Ease",
-            sharesBought: 1,
+    const userData = useSelector((state) => state.user.userData)
+    const accessToken = useSelector((state) => state.user.accessToken);
+    const dispatch = useDispatch();
+
+    const { data, isLoading } = useGetLoggedInUserQuery(accessToken);
+    useEffect(() => {
+        if (data) {
+            dispatch(setUserData(data));
         }
-        
+    }, [data]);
+
+
+    const fakeData = [
+        {
+            img: "https://pathmonk.com/wp-content/uploads/2024/01/best-startup-marketing-campaigns-1024x585.png",
+            campaignTitle: "Free Business Education",
+            sharesBought: 10
+        },
+        {
+            img: "https://cdn.britannica.com/74/190774-131-CC3FEB1F/jeans-denim-pants-clothing.jpg",
+            campaignTitle: "Low-Waisted Pants Shop",
+            sharesBought: 50000
+        },
+        {
+            img: "https://i.etsystatic.com/11931609/r/il/7c1191/1091679622/il_570xN.1091679622_ggrp.jpg",
+            campaignTitle: "Crystal Jewelry Shop",
+            sharesBought: 30
+        },
+        {
+            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcj3h0gMQw65xbDcE-RibsElSyU6Zz9pDRqzCiWlMqoA&s",
+            campaignTitle: "Car at Your Door Co",
+            sharesBought: 1
+        },
+        {
+            img: "https://store-images.s-microsoft.com/image/apps.56161.9007199266246365.1d5a6a53-3c49-4f80-95d7-78d76b0e05d0.a3e87fea-e03e-4c0a-8f26-9ecef205fa7b",
+            campaignTitle: "Watch with Ease",
+            sharesBought: 1
+        }
+
     ]
+    const [currentCampaignBeingDisplayed, setCurrentCampaignBeingDisplayed] = useState(fakeData[0]);
 
     const user = {
         name: "Ali Husni",
@@ -59,7 +75,7 @@ export default function HomeScreen() {
     };
     var graphWidth;
 
-    function changeCampaignBeingDisplayed(index){
+    function changeCampaignBeingDisplayed(index) {
         setCurrentCampaignBeingDisplayed(fakeData[index]);
         console.log(currentCampaignBeingDisplayed);
     }
@@ -71,7 +87,7 @@ export default function HomeScreen() {
                 <View style={styles.headerBar}>
                     <View style={styles.greetingContainer}>
                         <Text style={styles.greeting}>Hello</Text>
-                        <Text style={styles.userName}>, {user.name}</Text>
+                        <Text style={styles.userName}>, {userData.first_name} {userData.last_name}</Text>
                         <Entypo name="chevron-down" size={22} color="white" />
                     </View>
                     <View style={styles.notifications}>
@@ -83,7 +99,7 @@ export default function HomeScreen() {
                     </View>
                 </View>
                 <Text style={styles.balanceHeading}>My Available Balance</Text>
-                <Text style={styles.balance}>{user.currency + formattedBalance}</Text>
+                <Text style={styles.balance}>{CURRENCY} {userData.wallet_amount}</Text>
 
             </View>
             <View style={styles.lowerContainer}>
@@ -91,7 +107,7 @@ export default function HomeScreen() {
                     <View style={styles.spendingCont}>
                         <View>
                             <Text style={styles.spendingHeading}>Total Spending</Text>
-                            <Text style={styles.spending}>{user.currency + formattedSpending}</Text>
+                            <Text style={styles.spending}>{CURRENCY} {formattedSpending}</Text>
                         </View>
                         <View style={styles.percentageCont}>
                             <View style={styles.percNumberCont}>
@@ -131,25 +147,25 @@ export default function HomeScreen() {
                 <View style={styles.titleView}>
                     <Text style={styles.recentTxtStyle}>Your Shares: </Text>
                 </View>
-                    <Carousel
-                        loop
-                        width={Dimensions.get("screen").width}
-                        height={200}
-                        mode="parallax"
-                        modeConfig={{
-                            parallaxScrollingScale: 0.8,
-                            parallaxScrollingOffset: 150,
-                          }}
-                        data={fakeData}
-                        scrollAnimationDuration={2000}
-                        onSnapToItem={(index ) => changeCampaignBeingDisplayed(index)}
-                        renderItem={({ item, index }) => (
-                            <CampaignCard imgUri={item.img}/>
-                        )}
-                    />
-                    <Text style={styles.titleTxtStyle}>{currentCampaignBeingDisplayed.campaignTitle}</Text>
-                    <Text style={styles.sharesBoughtTxtStyle}>You Bought:{currentCampaignBeingDisplayed.sharesBought} shares</Text>
-                </View>
+                <Carousel
+                    loop
+                    width={Dimensions.get("screen").width}
+                    height={200}
+                    mode="parallax"
+                    modeConfig={{
+                        parallaxScrollingScale: 0.8,
+                        parallaxScrollingOffset: 150,
+                    }}
+                    data={fakeData}
+                    scrollAnimationDuration={2000}
+                    onSnapToItem={(index) => changeCampaignBeingDisplayed(index)}
+                    renderItem={({ item, index }) => (
+                        <CampaignCard imgUri={item.img} />
+                    )}
+                />
+                <Text style={styles.titleTxtStyle}>{currentCampaignBeingDisplayed.campaignTitle}</Text>
+                <Text style={styles.sharesBoughtTxtStyle}>You Bought:{currentCampaignBeingDisplayed.sharesBought} shares</Text>
+            </View>
         </CustomSafeArea>
     );
 }
@@ -161,9 +177,10 @@ const styles = StyleSheet.create({
         paddingTop: 24.5
     },
     lowerContainer: {
-        backgroundColor:GREY_COLOR.lightest,
+        backgroundColor: GREY_COLOR.lightest,
         paddingHorizontal: '5%',
- 
+        height: 110
+
     },
     headerBar: {
         display: "flex",
@@ -283,28 +300,28 @@ const styles = StyleSheet.create({
         position: "relative",
         left: -20
     },
-    carouselView:{
-        justifyContent:"flex-start",
-        alignItems:"center",
-        backgroundColor:GREY_COLOR.lightest,
-        flex:1
+    carouselView: {
+        justifyContent: "flex-start",
+        alignItems: "center",
+        backgroundColor: GREY_COLOR.lightest,
+        flex: 1
     },
-    titleTxtStyle:{
-        fontSize:FONT_SIZE.medium,
-        fontWeight:"bold"
+    titleTxtStyle: {
+        fontSize: FONT_SIZE.medium,
+        fontWeight: "bold"
     },
-    sharesBoughtTxtStyle:{
-        fontSize:FONT_SIZE.medium,
-        color:GREY_COLOR.medium
+    sharesBoughtTxtStyle: {
+        fontSize: FONT_SIZE.medium,
+        color: GREY_COLOR.medium
     },
-    recentTxtStyle:{
-        color:PRIMARY_COLOR.dark,
-        fontWeight:"bold",
-        fontSize:FONT_SIZE.medium,
+    recentTxtStyle: {
+        color: PRIMARY_COLOR.dark,
+        fontWeight: "bold",
+        fontSize: FONT_SIZE.medium,
     },
-    titleView:{
-        width:"100%",
-        paddingHorizontal:"5%"
+    titleView: {
+        width: "100%",
+        paddingHorizontal: "5%"
     }
 
 });

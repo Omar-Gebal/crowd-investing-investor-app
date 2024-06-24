@@ -36,6 +36,7 @@ function WithdrawScreen(props) {
             body: data
         });
         if ('data' in response) {
+            console.log(response.data);
             dispatch(setUserData(response.data))
         }
     }

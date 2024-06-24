@@ -14,10 +14,16 @@ import DefaultVerticalSpacing from "../components/DefaultVerticalSpacing";
 import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "src/shared/state/userSlice";
+import { useState } from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { Ionicons } from "react-native-vector-icons";
+
 
 function SignInScreen({ navigation }) {
 
     const [signIn, { isLoading, error }] = useSignInMutation();
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
     const dispatch = useDispatch();
 
 
@@ -35,7 +41,7 @@ function SignInScreen({ navigation }) {
     async function handleSignIn(data) {
         const response = await signIn(data);
         if ('data' in response) {
-            // console.log();
+            console.log(response.data);
             dispatch(setAccessToken(response.data.access_token));
             navigation.replace('TabNavigator');
         }
@@ -77,13 +83,23 @@ function SignInScreen({ navigation }) {
                             name="password"
                             placeholder="Password"
                             control={control}
-                            secureTextEntry={true}
+                            secureTextEntry={!isPasswordVisible}
                             rules={
                                 {
                                     required: fieldRequiredError,
                                 }
                             }
                         />
+                        <Pressable
+                            onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                        >
+                            <Ionicons
+                                name={isPasswordVisible ? "eye" : "eye-off"}
+                                size={24}
+                                color={PRIMARY_COLOR.main}
+                                style={{ marginLeft: "86%", marginTop: -40 }}
+                            />
+                        </Pressable>
                         {errors.password && <FormErrorText text={errors.password.message} />}
                         <Pressable onPress={forgotPassFn} style={styles.forgotPassTxtStyle}>
                             {({ pressed }) =>
@@ -127,8 +143,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         justifyContent: 'flex-end'
     },
-    forgotPassTxtStyle:{
-        marginTop:10
+    forgotPassTxtStyle: {
+        marginTop: 10
     }
 
 })
