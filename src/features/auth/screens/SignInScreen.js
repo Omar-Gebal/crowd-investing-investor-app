@@ -44,6 +44,9 @@ function SignInScreen({ navigation }) {
             dispatch(setAccessToken(response.data.access_token));
             navigation.replace('TabNavigator');
         }
+        else {
+            console.log('signInError', response)
+        }
     }
 
     const { control, handleSubmit, formState: { errors } } = useForm({

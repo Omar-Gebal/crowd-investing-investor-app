@@ -73,6 +73,16 @@ export const apiSlice = createApi({
                 body: body
             })
         }),
+        editProfile: builder.mutation({
+            query: ({ accessToken, body }) => ({
+                url: `/investors/me`,
+                method: 'PATCH',
+                headers: {
+                    authorization: `Bearer ${accessToken}`
+                },
+                body: body
+            })
+        }),
     })
 })
 
@@ -84,5 +94,6 @@ export const {
     useGetCampaignQuery,
     useBuySharesMutation,
     useTopUpWalletMutation,
-    useWithdrawWalletMutation
+    useWithdrawWalletMutation,
+    useEditProfileMutation
 } = apiSlice

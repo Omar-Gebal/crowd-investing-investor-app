@@ -5,69 +5,94 @@ import Field from "./Field";
 import CustomButton from "src/shared/components/CustomButton";
 import FormErrorText from "src/shared/components/FormErrorText";
 import DefaultVerticalSpacing from "src/features/auth/components/DefaultVerticalSpacing";
-
-
+import { useDispatch, useSelector } from "react-redux";
+import { useEditProfileMutation } from "src/shared/state/api/apiSlice";
+import { emailRegexPattern } from "src/shared/utils/validators";
+import { useState } from "react";
+import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
+import { setUserData } from "src/shared/state/userSlice";
+import { SECONDARY_COLOR } from "src/shared/constants/colorConstants";
 
 function ProfileCard(props) {
-    
-   
+    const [editSuccessful, setEditSuccessful] = useState(false);
+    const dispatch = useDispatch();
+    const userData = useSelector((state) => state.user.userData);
+    const [editProfile, { isLoading, error }] = useEditProfileMutation();
+    const accessToken = useSelector((state) => state.user.accessToken);
+
     const { control, handleSubmit, formState: { errors } } = useForm({
-        defaultValues: {          //adjust defaults
-            first_name: '',
-            last_name: '',
-            email: '',
-            phone_number: '',      //didnt add validation for the phone number to be a number
+        defaultValues: {
+            first_name: userData.first_name,
+            last_name: userData.last_name,
+            phone_number: userData.phone_number,
         }
     });
 
-    const onSubmit = (data) => console.log(data)
+    const onSubmit = async (data) => {
+        setEditSuccessful(false);
+        const response = await editProfile({
+            accessToken,
+            body: data
+        });
+        if ('data' in response) {
+            console.log(response.data);
+            setEditSuccessful(true);
+            dispatch(setUserData(response.data));
+        }
+        console.log(response);
+    }
 
     return (
         <View style={styles.container}>
-            
-                <Pfp />
-                <View style={styles.formStyle}>
-                    <Field control={control} name="first_name" placeholder="First Name" rules={{required: true}}/>
-                    {errors.first_name && <FormErrorText text={"first name required"} />}
-                  
-                    <Field control={control} name="last_name" placeholder="Last Name" rules={{required: true}}/>
-                    {errors.last_name && <FormErrorText text={"Last name required"} />}
-                
-                    <Field control={control} name="email" placeholder="E-mail" rules={{required: true}}/>
-                    {errors.email && <FormErrorText text={"email is required"} />}
-                  
-                    <Field control={control} name="phone_number" placeholder="Phone" rules={{required: true}}/>  
-                    {errors.phone_number && <FormErrorText text={"Phone number required"} />}
-                    <View style={styles.btnView}>
-                        <CustomButton onPress={handleSubmit(onSubmit)} title="Save changes"/>
-                    </View>
+
+            <Pfp />
+            <View style={styles.formStyle}>
+                <Field control={control} label={'First Name'} name="first_name" rules={{ required: true }} />
+                {errors.first_name && <FormErrorText text={"first name required"} />}
+                <DefaultVerticalSpacing />
+
+                <Field control={control} label={'Last Name'} name="last_name" rules={{ required: true }} />
+                {errors.last_name && <FormErrorText text={"Last name required"} />}
+                <DefaultVerticalSpacing />
+
+
+                <Field control={control} label={'Phone number'} name="phone_number" rules={{ required: true }} />
+                {errors.phone_number && <FormErrorText text={"Phone number required"} />}
+                <DefaultVerticalSpacing />
+                <View style={styles.btnView}>
+                    <CustomButton onPress={handleSubmit(onSubmit)} title={isLoading ? <DefaultActivityIndicator /> : "Save changes"} />
+                    {editSuccessful && <Text style={styles.successMessageStyle}> Your profile is edited successfully</Text>}
                 </View>
-            
+            </View>
+
         </View>
     );
-   
+
 }
 const styles = StyleSheet.create({
-    container:{
-        width:400,
-        height:500,
-        elevation:10,
-        zIndex:10,
-        borderRadius:10,
-        padding:10,
-        backgroundColor:"white",
-        justifyContent:"flex-start",
-        alignItems:"center"
+    container: {
+        width: 400,
+        height: 450,
+        elevation: 10,
+        zIndex: 10,
+        borderRadius: 10,
+        padding: 10,
+        backgroundColor: "white",
+        justifyContent: "flex-start",
+        alignItems: "center"
     },
-    formStyle:{
-        margin:50,
-        height:300,
-        padding:1,  
-        justifyContent:"space-between" 
+    formStyle: {
+        margin: 20,
+        height: 400,
+        padding: 1,
     },
-    btnView:{
-
+    successMessageStyle: {
+        alignSelf: 'center',
+        color: SECONDARY_COLOR.main,
+        marginTop: 2,
+    },
+    btnView: {
+        alignItems: "stretch",
     }
-   
 })
 export default ProfileCard;
