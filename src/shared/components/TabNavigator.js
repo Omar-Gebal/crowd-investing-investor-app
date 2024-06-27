@@ -36,11 +36,11 @@ export default function TabNavigator() {
                     ),
                 }}
             />
-             <Tab.Screen name="Profile" component={ProfileScreen}
+            <Tab.Screen name="Profile" component={ProfileScreen}
                 options={{
                     tabBarLabel: 'Profile',
                     tabBarIcon: ({ color, size }) => (
-                        <AntDesign name="profile" size={size} color={color} />
+                        <Ionicons name="person" size={size} color={color} />
                     ),
                 }}
             />

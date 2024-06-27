@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define our single API slice object
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://crowd-investing-backend.onrender.com' }),
+    baseQuery: fetchBaseQuery({ baseUrl: 'http://13.53.182.110' }),
     // The "endpoints" represent operations and requests for this server
     endpoints: builder => ({
         //auth
