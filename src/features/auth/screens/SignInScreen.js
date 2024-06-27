@@ -6,7 +6,7 @@ import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 import { PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
 import CustomSafeArea from "src/shared/components/CustomSafeArea";
 import HalfPressableSentence from "../components/HalfPressableSentence";
-import FormErrorText from "../components/FormErrorText";
+import FormErrorText from "../../../shared/components/FormErrorText";
 import { emailRegexPattern, passwordRegexPattern } from "src/shared/utils/validators";
 import AuthPageHeader from "../components/AuthPageHeader";
 import { useSignInMutation } from "src/shared/state/api/apiSlice";
@@ -15,7 +15,6 @@ import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndic
 import { useDispatch } from "react-redux";
 import { setAccessToken } from "src/shared/state/userSlice";
 import { useState } from "react";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "react-native-vector-icons";
 
 

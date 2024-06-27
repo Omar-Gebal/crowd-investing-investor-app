@@ -5,7 +5,7 @@ import { AntDesign, Entypo } from '@expo/vector-icons';
 import AllCamaignsScreen from 'src/features/campgains/screens/AllCampaignsScreen';
 import WalletScreen from 'src/features/wallet/screens/WalletScreen';
 import { PRIMARY_COLOR } from '../constants/colorConstants';
-
+import ProfileScreen from 'src/features/profile/screens/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,6 +33,14 @@ export default function TabNavigator() {
                     tabBarLabel: 'Campgains',
                     tabBarIcon: ({ color, size }) => (
                         <AntDesign name="copy1" size={size} color={color} />
+                    ),
+                }}
+            />
+             <Tab.Screen name="Profile" component={ProfileScreen}
+                options={{
+                    tabBarLabel: 'Profile',
+                    tabBarIcon: ({ color, size }) => (
+                        <AntDesign name="profile" size={size} color={color} />
                     ),
                 }}
             />

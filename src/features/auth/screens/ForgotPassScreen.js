@@ -2,7 +2,7 @@ import { View, StyleSheet, } from "react-native";
 import CustomSafeArea from "src/shared/components/CustomSafeArea";
 import AuthPageHeader from "src/features/auth/components/AuthPageHeader";
 import { useForm } from "react-hook-form";
-import FormErrorText from "src/features/auth/components/FormErrorText";
+import FormErrorText from "src/shared/components/FormErrorText";
 import CustomInput from "src/features/auth/components/CustomInput";
 import CustomButton from "src/shared/components/CustomButton";
 import { emailRegexPattern } from "src/shared/utils/validators";

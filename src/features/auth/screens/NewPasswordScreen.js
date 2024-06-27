@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import { passwordRegexPattern } from 'src/shared/utils/validators';
 import DefaultVerticalSpacing from '../components/DefaultVerticalSpacing';
 import CustomButton from 'src/shared/components/CustomButton';
-import FormErrorText from 'src/features/auth/components/FormErrorText';
+import FormErrorText from 'src/shared/components/FormErrorText';
 import CustomModal from '../components/CustomModal';
 function NewPasswordScreen(props) {
 

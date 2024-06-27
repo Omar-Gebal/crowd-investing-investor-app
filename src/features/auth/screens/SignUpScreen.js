@@ -8,7 +8,7 @@ import CustomButton from 'src/shared/components/CustomButton';
 import HalfPressableSentence from '../components/HalfPressableSentence';
 import DefaultVerticalSpacing from '../components/DefaultVerticalSpacing';
 import { emailRegexPattern, passwordRegexPattern } from 'src/shared/utils/validators';
-import FormErrorText from '../components/FormErrorText';
+import FormErrorText from '../../../shared/components/FormErrorText';
 import { useSignUpMutation } from 'src/shared/state/api/apiSlice';
 import { dispatchCommand } from 'react-native-reanimated';
 import { setAccessToken, setUserData } from 'src/shared/state/userSlice';
