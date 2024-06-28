@@ -1,30 +1,67 @@
+import React, { useEffect, useState } from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import CustomSafeArea from "src/shared/components/CustomSafeArea";
 import { BLACK_COLOR, ERROR_COLOR, PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
-import { Entypo, Fontisto, AntDesign } from '@expo/vector-icons';
+import { Entypo, Fontisto } from '@expo/vector-icons';
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
-import { LineChart } from 'react-native-chart-kit';
+import { LineChart, PieChart } from 'react-native-chart-kit';
 import Carousel from 'react-native-reanimated-carousel';
 import CampaignCard from "../components/CampaignCard";
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useGetLoggedInUserQuery } from "src/shared/state/api/apiSlice";
 import { setUserData } from "src/shared/state/userSlice";
 import { CURRENCY } from "src/shared/constants/dataConstants";
-
+import InvestmentSummary from "../components/InvestmentSummary";
 
 export default function HomeScreen() {
-    const userData = useSelector((state) => state.user.userData)
+    const userData = useSelector((state) => state.user.userData);
     const accessToken = useSelector((state) => state.user.accessToken);
     const dispatch = useDispatch();
-
     const { data, isLoading } = useGetLoggedInUserQuery(accessToken);
+
     useEffect(() => {
         if (data) {
             dispatch(setUserData(data));
         }
     }, [data]);
 
+    const fakePieData = [
+        {
+            name: "Seoul",
+            population: 21500000,
+            color: "#DB9B1D",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "Toronto",
+            population: 2800000,
+            color: "#9B1DDB",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "Beijing",
+            population: 527612,
+            color: "#19C265",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "New York",
+            population: 8538000,
+            color: "#458A65",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        },
+        {
+            name: "Moscow",
+            population: 11920000,
+            color: "#503A5C",
+            legendFontColor: "#7F7F7F",
+            legendFontSize: 15
+        }
+    ];
 
     const fakeData = [
         {
@@ -52,8 +89,8 @@ export default function HomeScreen() {
             campaignTitle: "Watch with Ease",
             sharesBought: 1
         }
+    ];
 
-    ]
     const [currentCampaignBeingDisplayed, setCurrentCampaignBeingDisplayed] = useState(fakeData[0]);
 
     const user = {
@@ -62,24 +99,15 @@ export default function HomeScreen() {
         spending: 6234.00,
         currency: "$",
         notifications: 10
-    }
-    const formattedBalance = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.balance)
-    const formattedSpending = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.spending)
-    const lineChartData = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        datasets: [
-            {
-                data: [60, 50, 70, 80, 105, 80, 70, 60, 80, 90, 100, 80, 70]
-            },
-        ],
     };
-    var graphWidth;
+
+    const formattedBalance = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.balance);
+    const formattedSpending = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.spending);
 
     function changeCampaignBeingDisplayed(index) {
         setCurrentCampaignBeingDisplayed(fakeData[index]);
         console.log(currentCampaignBeingDisplayed);
     }
-
 
     return (
         <CustomSafeArea backgroundColor={PRIMARY_COLOR.main}>
@@ -88,64 +116,22 @@ export default function HomeScreen() {
                     <View style={styles.greetingContainer}>
                         <Text style={styles.greeting}>Hello</Text>
                         <Text style={styles.userName}>, {userData.first_name} {userData.last_name}</Text>
-                        <Entypo name="chevron-down" size={22} color="white" />
                     </View>
                     <View style={styles.notifications}>
                         <Fontisto name="bell" size={24} color="white" />
-                        <View style={styles.notifCountContainer}>
-                            <Text style={styles.notifCount}>{user.notifications > 9 ? "9+" : user.notifications}</Text>
-
-                        </View>
                     </View>
                 </View>
                 <Text style={styles.balanceHeading}>My Available Balance</Text>
                 <Text style={styles.balance}>{CURRENCY} {userData.wallet_amount}</Text>
-
             </View>
-            <View style={styles.lowerContainer}>
-                <View style={styles.floatingCard} >
-                    <View style={styles.spendingCont}>
-                        <View>
-                            <Text style={styles.spendingHeading}>Total Spending</Text>
-                            <Text style={styles.spending}>{CURRENCY} {formattedSpending}</Text>
-                        </View>
-                        <View style={styles.percentageCont}>
-                            <View style={styles.percNumberCont}>
-                                <AntDesign style={{ marginHorizontal: 3 }} name="caretup" size={10} color="white" />
-                                <Text style={styles.percNumber}>3.2%</Text>
-                            </View>
-                            <Entypo name="chevron-right" size={24} color={GREY_COLOR.light} />
-                        </View>
-                    </View>
-                    <LineChart
-                        style={styles.lineGraph}
-                        data={lineChartData}
-                        height={75}
-                        width={Dimensions.get("screen").width}
-                        chartConfig={{
-                            backgroundColor: "#FFFFFF00",
-                            backgroundGradientFrom: "#FFFFFF00",
-                            backgroundGradientTo: "#FFFFFF00",
-                            color: (opacity = 3) => `rgba(255, 92, 122, ${opacity})`,
-                            fillShadowGradientFrom: ERROR_COLOR.light,
-                            fillShadowGradientFromOpacity: 0.3,
-                            fillShadowGradientToOpacity: 0,
-                            strokeWidth: 3,
-                            backgroundGradientToOpacity: 0,
-                            backgroundGradientFromOpacity: 0
-                        }}
-                        withHorizontalLabels={false}
-                        withVerticalLabels={false}
-                        withHorizontalLines={false}
-                        withVerticalLines={false}
-                        withDots={false}
-                        bezier
-                    />
-                </View>
-            </View>
+            <InvestmentSummary
+                formattedSpending={formattedSpending}
+                fakePieData={fakePieData}
+                CURRENCY={CURRENCY}
+            />
             <View style={styles.carouselView}>
                 <View style={styles.titleView}>
-                    <Text style={styles.recentTxtStyle}>Your Shares: </Text>
+                    <Text style={styles.recentTxtStyle}>Your Investments: </Text>
                 </View>
                 <Carousel
                     loop
@@ -157,30 +143,23 @@ export default function HomeScreen() {
                         parallaxScrollingOffset: 150,
                     }}
                     data={fakeData}
-                    scrollAnimationDuration={2000}
+                    scrollAnimationDuration={100}
                     onSnapToItem={(index) => changeCampaignBeingDisplayed(index)}
                     renderItem={({ item, index }) => (
                         <CampaignCard imgUri={item.img} />
                     )}
                 />
                 <Text style={styles.titleTxtStyle}>{currentCampaignBeingDisplayed.campaignTitle}</Text>
-                <Text style={styles.sharesBoughtTxtStyle}>You Bought:{currentCampaignBeingDisplayed.sharesBought} shares</Text>
+                <Text style={styles.sharesBoughtTxtStyle}>You Bought: {currentCampaignBeingDisplayed.sharesBought} shares</Text>
             </View>
         </CustomSafeArea>
     );
 }
 
-
 const styles = StyleSheet.create({
     topContainer: {
         paddingHorizontal: '5%',
-        paddingTop: 24.5
-    },
-    lowerContainer: {
-        backgroundColor: GREY_COLOR.lightest,
-        paddingHorizontal: '5%',
-        height: 110
-
+        paddingTop: 20,
     },
     headerBar: {
         display: "flex",
@@ -191,7 +170,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        marginBottom: 24
+        marginBottom: 5,
     },
     greeting: {
         fontSize: FONT_SIZE.medium,
@@ -207,12 +186,11 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     notifications: {
-        marginRight: "3%"
+        marginRight: "3%",
     },
     notifCount: {
         color: "white",
-        textAlign: "center"
-
+        textAlign: "center",
     },
     notifCountContainer: {
         backgroundColor: ERROR_COLOR.main,
@@ -221,98 +199,35 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         position: "absolute",
         top: -7,
-        left: 9
+        left: 9,
     },
     balanceHeading: {
         color: PRIMARY_COLOR.light,
         fontSize: FONT_SIZE.small,
         lineHeight: 21,
         marginBottom: 12,
-        fontWeight: "500"
-
+        fontWeight: "500",
     },
     balance: {
         fontSize: 40,
         fontWeight: "600",
         lineHeight: 48,
         color: "white",
-        marginBottom: 131
-    },
-    floatingCard: {
-        backgroundColor: "red",
-        position: "relative",
-        top: -95,
-        borderRadius: 15,
-        backgroundColor: "white",
-        paddingHorizontal: 20,
-        paddingVertical: 24,
-        shadowOffset: { width: 0, height: 34 },
-        shadowColor: "#08090B12",
-        shadowOpacity: 0.7,
-        shadowRadius: 200,
-        display: "flex",
-        alignItems: "center"
-    },
-    spendingCont: {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        width: "100%"
-    },
-    spendingHeading: {
-        color: GREY_COLOR.light,
-        fontSize: FONT_SIZE.small,
-        fontWeight: "500",
-        lineHeight: 21,
-        marginBottom: 8
-    },
-    spending: {
-        color: BLACK_COLOR.secondary,
-        fontWeight: "600",
-        fontSize: 24,
-        lineHeight: 36
-    },
-    percentageCont: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        paddingRight: 4
-    },
-    percNumberCont: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        backgroundColor: ERROR_COLOR.light,
-        paddingHorizontal: 6,
-        paddingVertical: 5,
-        borderRadius: 12,
-        marginRight: 16
-    },
-    percNumber: {
-        color: "white",
-        fontSize: FONT_SIZE.small,
-        fontWeight: "600",
-        lineHeight: 21,
-        marginLeft: 2
-    },
-    lineGraph: {
-        position: "relative",
-        left: -20
+        marginBottom: 131,
     },
     carouselView: {
         justifyContent: "flex-start",
         alignItems: "center",
         backgroundColor: GREY_COLOR.lightest,
-        flex: 1
+        flex: 1,
     },
     titleTxtStyle: {
         fontSize: FONT_SIZE.medium,
-        fontWeight: "bold"
+        fontWeight: "bold",
     },
     sharesBoughtTxtStyle: {
         fontSize: FONT_SIZE.medium,
-        color: GREY_COLOR.medium
+        color: GREY_COLOR.medium,
     },
     recentTxtStyle: {
         color: PRIMARY_COLOR.dark,
@@ -321,9 +236,6 @@ const styles = StyleSheet.create({
     },
     titleView: {
         width: "100%",
-        paddingHorizontal: "5%"
-    }
-
+        paddingHorizontal: "5%",
+    },
 });
-
-

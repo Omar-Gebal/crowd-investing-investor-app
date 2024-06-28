@@ -6,6 +6,7 @@ const initialState = {
         last_name: null,
         wallet_amount: null,
         wallet_activities: [],
+        campaign_participations: []
     },
     accessToken: null,
     amountsHidden: false,
