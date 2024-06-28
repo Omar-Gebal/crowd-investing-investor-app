@@ -1,32 +1,57 @@
-import React from 'react';
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { GREY_COLOR, BLACK_COLOR } from "src/shared/constants/colorConstants";
+import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 
-function CampaignCard({imgUri,description}) {
-   
+function CampaignCard({ imgUri, title, sharesBought }) {
     return (
-        <Pressable style={styles.container}>
-            <Image source={{uri:imgUri}}  style={styles.imgStyle}/>
-        </Pressable>
+        <View style={styles.cardContainer}>
+            <Pressable style={styles.imageContainer}>
+                <Image source={{ uri: imgUri }} style={styles.image} />
+            </Pressable>
+            <View style={styles.informationSection}>
+                <Text style={styles.title}>{title}</Text>
+                <Text style={styles.sharesBought}>You Own: {sharesBought} {sharesBought > 1 ? 'shares' : 'share'}</Text>
+            </View>
+        </View>
     );
 }
+
 const styles = StyleSheet.create({
-    container:{
-        padding:"2%",
-        elevation:5,
-        zIndex:5,
-        backgroundColor:"white",
-        flex:1,
-        justifyContent: 'center',
+    cardContainer: {
+        backgroundColor: 'white',
+        borderRadius: 10,
+        overflow: 'hidden',
+        shadowColor: BLACK_COLOR.secondary,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 5,
+        elevation: 5,
+        margin: 10,
     },
-    txtStyle:{
-        textAlign: 'center', 
-        fontSize: 30 
+    imageContainer: {
+        width: '100%',
+        height: 150,
     },
-    imgStyle:{
-        width:"100%",
-        height:"100%",
-        borderRadius:5
+    image: {
+        width: '100%',
+        height: '100%',
+    },
+    title: {
+        fontSize: FONT_SIZE.large,
+        fontWeight: '600',
+        color: BLACK_COLOR.primary,
+        marginTop: 10,
+        marginHorizontal: 10,
+    },
+    sharesBought: {
+        fontSize: FONT_SIZE.medium,
+        color: GREY_COLOR.medium,
+        marginBottom: 10,
+        marginHorizontal: 10,
+    },
+    informationSection: {
+        padding: 10
     }
-})
+});
 
 export default CampaignCard;

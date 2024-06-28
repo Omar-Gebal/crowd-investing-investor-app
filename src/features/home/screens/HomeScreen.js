@@ -91,8 +91,6 @@ export default function HomeScreen() {
         }
     ];
 
-    const [currentCampaignBeingDisplayed, setCurrentCampaignBeingDisplayed] = useState(fakeData[0]);
-
     const user = {
         name: "Ali Husni",
         balance: 12253.70,
@@ -101,13 +99,9 @@ export default function HomeScreen() {
         notifications: 10
     };
 
-    const formattedBalance = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.balance);
+    const formattedBalance = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(userData.wallet_amount);
     const formattedSpending = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.spending);
 
-    function changeCampaignBeingDisplayed(index) {
-        setCurrentCampaignBeingDisplayed(fakeData[index]);
-        console.log(currentCampaignBeingDisplayed);
-    }
 
     return (
         <CustomSafeArea backgroundColor={PRIMARY_COLOR.main}>
@@ -121,8 +115,8 @@ export default function HomeScreen() {
                         <Fontisto name="bell" size={24} color="white" />
                     </View>
                 </View>
-                <Text style={styles.balanceHeading}>My Available Balance</Text>
-                <Text style={styles.balance}>{CURRENCY} {userData.wallet_amount}</Text>
+                <Text style={styles.balanceHeading}>Your Available Balance</Text>
+                <Text style={styles.balance}>{CURRENCY} {formattedBalance}</Text>
             </View>
             <InvestmentSummary
                 formattedSpending={formattedSpending}
@@ -136,7 +130,7 @@ export default function HomeScreen() {
                 <Carousel
                     loop
                     width={Dimensions.get("screen").width}
-                    height={200}
+                    height={300}
                     mode="parallax"
                     modeConfig={{
                         parallaxScrollingScale: 0.8,
@@ -144,13 +138,10 @@ export default function HomeScreen() {
                     }}
                     data={fakeData}
                     scrollAnimationDuration={100}
-                    onSnapToItem={(index) => changeCampaignBeingDisplayed(index)}
-                    renderItem={({ item, index }) => (
-                        <CampaignCard imgUri={item.img} />
+                    renderItem={({ item }) => (
+                        <CampaignCard imgUri={item.img} title={item.campaignTitle} sharesBought={item.sharesBought} />
                     )}
                 />
-                <Text style={styles.titleTxtStyle}>{currentCampaignBeingDisplayed.campaignTitle}</Text>
-                <Text style={styles.sharesBoughtTxtStyle}>You Bought: {currentCampaignBeingDisplayed.sharesBought} shares</Text>
             </View>
         </CustomSafeArea>
     );
@@ -220,14 +211,6 @@ const styles = StyleSheet.create({
         alignItems: "center",
         backgroundColor: GREY_COLOR.lightest,
         flex: 1,
-    },
-    titleTxtStyle: {
-        fontSize: FONT_SIZE.medium,
-        fontWeight: "bold",
-    },
-    sharesBoughtTxtStyle: {
-        fontSize: FONT_SIZE.medium,
-        color: GREY_COLOR.medium,
     },
     recentTxtStyle: {
         color: PRIMARY_COLOR.dark,
