@@ -56,6 +56,7 @@ export const apiSlice = createApi({
         getStartupDetails: builder.query({
             query: (campaign_id) => `/startups/${campaign_id}`
         }),
+
         //wallet
         topUpWallet: builder.mutation({
             query: ({ accessToken, body }) => ({
@@ -87,6 +88,17 @@ export const apiSlice = createApi({
                 body: body
             })
         }),
+        //Analytics
+        getInvestmentsPerIndustry: builder.query({
+            query: (accessToken) => ({
+                url: '/investors/me/investments_per_industry',
+                method: 'GET',
+                headers: {
+                    authorization: `Bearer ${accessToken}`
+                }
+            })
+
+        }),
     })
 })
 
@@ -100,5 +112,6 @@ export const {
     useBuySharesMutation,
     useTopUpWalletMutation,
     useWithdrawWalletMutation,
-    useEditProfileMutation
+    useEditProfileMutation,
+    useGetInvestmentsPerIndustryQuery,
 } = apiSlice

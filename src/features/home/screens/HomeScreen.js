@@ -12,6 +12,7 @@ import { useGetLoggedInUserQuery } from "src/shared/state/api/apiSlice";
 import { setUserData } from "src/shared/state/userSlice";
 import { CURRENCY } from "src/shared/constants/dataConstants";
 import InvestmentSummary from "../components/InvestmentSummary";
+import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
     const userData = useSelector((state) => state.user.userData);
@@ -24,44 +25,6 @@ export default function HomeScreen() {
             dispatch(setUserData(data));
         }
     }, [data]);
-
-    const fakePieData = [
-        {
-            name: "Seoul",
-            population: 21500000,
-            color: "#DB9B1D",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "Toronto",
-            population: 2800000,
-            color: "#9B1DDB",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "Beijing",
-            population: 527612,
-            color: "#19C265",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "New York",
-            population: 8538000,
-            color: "#458A65",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        },
-        {
-            name: "Moscow",
-            population: 11920000,
-            color: "#503A5C",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-        }
-    ];
 
     const fakeData = [
         {
@@ -120,7 +83,6 @@ export default function HomeScreen() {
             </View>
             <InvestmentSummary
                 formattedSpending={formattedSpending}
-                fakePieData={fakePieData}
                 CURRENCY={CURRENCY}
             />
             <View style={styles.carouselView}>
@@ -200,7 +162,7 @@ const styles = StyleSheet.create({
         fontWeight: "500",
     },
     balance: {
-        fontSize: 40,
+        fontSize: FONT_SIZE.large * 1.4,
         fontWeight: "600",
         lineHeight: 48,
         color: "white",

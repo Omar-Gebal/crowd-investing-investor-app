@@ -7,6 +7,7 @@ import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
 import ProgressBar from '../components/ProgressBar';
 import { useGetStartupDetailsQuery } from 'src/shared/state/api/apiSlice';
 import StartupSection from '../components/StartupSection';
+import { useNavigation } from '@react-navigation/native';
 
 function CampaignDetailsScreen({ navigation }) {
     const selectedCampaign = useSelector((state) => state.campaign.selectedCampaign)

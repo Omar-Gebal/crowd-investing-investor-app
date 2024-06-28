@@ -21,7 +21,7 @@ function StartupSection({ startup, isLoading, isError, styles, HighlightedText }
             <DefaultVerticalSpacing />
             <Text style={internalStyles.bigTitle}>Predicted Success Rate</Text>
             <Text style={[internalStyles.successRate, { color: getSuccessRateColor(startup.success_rate) }]}>
-                {`${(startup.success_rate * 100).toFixed(2)}%`}
+                {`${(startup.success_rate).toFixed(2)}%`}
             </Text>
             <Text style={styles.sectionItem}>
                 This success rate is predicted by our AI model and isn't accurate. It is based on various factors and should be considered as an estimate.
