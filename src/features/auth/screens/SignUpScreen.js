@@ -32,7 +32,7 @@ function SignUpScreen({ navigation }) {
         if ('data' in response) {
             dispatch(setAccessToken(response.data.access_token));
             dispatch(setUserData(response.data.investor));
-            navigation.replace('TabNavigator');
+            navigation.replace('UploadId');
         }
     }
 
