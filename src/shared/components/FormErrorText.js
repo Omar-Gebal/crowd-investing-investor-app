@@ -1,20 +1,18 @@
-import { Text, TextInput, View, StyleSheet, Pressable } from "react-native";
-import { ERROR_COLOR, PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
+import { Text, StyleSheet } from "react-native";
+import { ERROR_COLOR } from "src/shared/constants/colorConstants";
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 
-function FormErrorText({ text }) {
+function FormErrorText({ text, marginLeft = 20 }) {
     return (
-        <Text style={styles.error}>{text}</Text>
+        <Text style={[styles.error, { marginLeft }]}>{text}</Text>
     )
 }
 
 const styles = StyleSheet.create({
     error: {
         color: ERROR_COLOR.main,
-        marginLeft: 20,
         marginTop: 5
     }
 })
-
 
 export default FormErrorText;

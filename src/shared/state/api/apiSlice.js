@@ -52,6 +52,10 @@ export const apiSlice = createApi({
             })
         }),
 
+        //startup
+        getStartupDetails: builder.query({
+            query: (campaign_id) => `/startups/${campaign_id}`
+        }),
         //wallet
         topUpWallet: builder.mutation({
             query: ({ accessToken, body }) => ({
@@ -92,6 +96,7 @@ export const {
     useGetLoggedInUserQuery,
     useGetAllCampaignsQuery,
     useGetCampaignQuery,
+    useGetStartupDetailsQuery,
     useBuySharesMutation,
     useTopUpWalletMutation,
     useWithdrawWalletMutation,

@@ -10,7 +10,7 @@ import SignUpScreen from 'src/features/auth/screens/SignUpScreen';
 import NewPasswordScreen from 'src/features/auth/screens/NewPasswordScreen';
 import ForgotPassScreen from 'src/features/auth/screens/ForgotPassScreen';
 import TabNavigator from 'src/shared/components/TabNavigator';
-import CampaignDetailsScreen from 'src/features/campgains/screens/CampgaignDetailsScreen';
+import CampaignDetailsScreen from 'src/features/campgains/screens/CampaignDetailsScreen';
 import BuySharesScreen from 'src/features/campgains/screens/BuySharesScreen';
 import TopUpScreen from 'src/features/wallet/screens/TopUpScreen';
 import WithdrawScreen from 'src/features/wallet/screens/WithdrawScreen';

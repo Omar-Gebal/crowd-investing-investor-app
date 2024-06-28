@@ -5,11 +5,13 @@ import CustomButton from 'src/shared/components/CustomButton';
 import { SECONDARY_COLOR } from 'src/shared/constants/colorConstants';
 import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
 import ProgressBar from '../components/ProgressBar';
+import { useGetStartupDetailsQuery } from 'src/shared/state/api/apiSlice';
+import StartupSection from '../components/StartupSection';
 
 function CampaignDetailsScreen({ navigation }) {
     const selectedCampaign = useSelector((state) => state.campaign.selectedCampaign)
     const startDate = new Date(selectedCampaign.start_time).toLocaleString().split(',')[0]
-
+    const { data: startupData, isLoading, isError } = useGetStartupDetailsQuery(selectedCampaign.startup_id);
     const HighlightedText = ({ text }) => <Text style={styles.highlightedText}>{text}</Text>
 
     return (
@@ -23,7 +25,7 @@ function CampaignDetailsScreen({ navigation }) {
                 <Text style={styles.sectionTitle}>Description</Text>
                 <Text>{selectedCampaign.description}</Text>
                 <DefaultVerticalSpacing />
-                <CustomButton title={"Buy shares"}  onPress={()=>navigation.navigate("BuyShares")}/>
+                <CustomButton title={"Buy shares"} onPress={() => navigation.navigate("BuyShares")} />
                 <DefaultVerticalSpacing />
                 <Text style={styles.sectionTitle}>Campaign Progress</Text>
                 <ProgressBar percentComplete={selectedCampaign.percent_complete} />
@@ -41,16 +43,16 @@ function CampaignDetailsScreen({ navigation }) {
                             Target: <HighlightedText text={`$${selectedCampaign.target.toLocaleString()}`} />
                         </Text>
                         <Text>Remaining Time: <HighlightedText text={selectedCampaign.remaining_time} /></Text>
-
                     </View>
                 </View>
+                <DefaultVerticalSpacing />
+                {<StartupSection isLoading={isLoading} isError={isError} startup={startupData} styles={styles} HighlightedText={HighlightedText} />}
                 <DefaultVerticalSpacing />
                 <Text style={styles.sectionTitle}>Extra Details</Text>
                 <Text style={styles.sectionItem}>📅 Campaign start date : <HighlightedText text={startDate} /></Text>
                 <Text style={styles.sectionItem}>📃 Campaign status : <HighlightedText text={selectedCampaign.status} /></Text>
 
             </View>
-
         </ScrollView>
     );
 }
@@ -70,7 +72,6 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: FONT_SIZE.medium,
-        fontSize: FONT_SIZE.medium,
         fontWeight: 'bold',
         marginBottom: 10,
     },
@@ -82,7 +83,6 @@ const styles = StyleSheet.create({
     },
     sectionItem: {
         marginBottom: 5,
-
     },
     detailsContainer: {
         flexDirection: 'row',
@@ -95,8 +95,6 @@ const styles = StyleSheet.create({
     highlightedText: {
         color: SECONDARY_COLOR.main,
     },
-
 });
-
 
 export default CampaignDetailsScreen;

@@ -48,16 +48,16 @@ function ProfileCard(props) {
             <Pfp />
             <View style={styles.formStyle}>
                 <Field control={control} label={'First Name'} name="first_name" rules={{ required: true }} />
-                {errors.first_name && <FormErrorText text={"first name required"} />}
+                {errors.first_name && <FormErrorText marginLeft={0} text={"first name required"} />}
                 <DefaultVerticalSpacing />
 
                 <Field control={control} label={'Last Name'} name="last_name" rules={{ required: true }} />
-                {errors.last_name && <FormErrorText text={"Last name required"} />}
+                {errors.last_name && <FormErrorText marginLeft={0} text={"Last name required"} />}
                 <DefaultVerticalSpacing />
 
 
                 <Field control={control} label={'Phone number'} name="phone_number" rules={{ required: true }} />
-                {errors.phone_number && <FormErrorText text={"Phone number required"} />}
+                {errors.phone_number && <FormErrorText marginLeft={0} text={"Phone number required"} />}
                 <DefaultVerticalSpacing />
                 <View style={styles.btnView}>
                     <CustomButton onPress={handleSubmit(onSubmit)} title={isLoading ? <DefaultActivityIndicator /> : "Save changes"} />
@@ -93,6 +93,9 @@ const styles = StyleSheet.create({
     },
     btnView: {
         alignItems: "stretch",
+    },
+    marginRemover: {
+        marginLeft: 0
     }
 })
 export default ProfileCard;
