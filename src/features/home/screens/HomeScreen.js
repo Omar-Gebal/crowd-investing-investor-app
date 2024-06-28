@@ -17,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 export default function HomeScreen() {
     const userData = useSelector((state) => state.user.userData);
     const accessToken = useSelector((state) => state.user.accessToken);
+    const campaignParticipations = useSelector((state) => state.user.userData.campaign_participations);
     const dispatch = useDispatch();
     const { data, isLoading } = useGetLoggedInUserQuery(accessToken);
 
@@ -98,10 +99,10 @@ export default function HomeScreen() {
                         parallaxScrollingScale: 0.8,
                         parallaxScrollingOffset: 150,
                     }}
-                    data={fakeData}
+                    data={campaignParticipations}
                     scrollAnimationDuration={100}
                     renderItem={({ item }) => (
-                        <CampaignCard imgUri={item.img} title={item.campaignTitle} sharesBought={item.sharesBought} />
+                        <CampaignCard participation={item} imgUri={item.campaign.image_url} title={item.startup.name} sharesBought={item.number_of_shares} />
                     )}
                 />
             </View>
