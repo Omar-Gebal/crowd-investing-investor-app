@@ -34,7 +34,7 @@ export const apiSlice = createApi({
 
         }),
 
-        //campgains
+        //campaigns
         getAllCampaigns: builder.query({
             query: () => '/campaigns/'
         }),

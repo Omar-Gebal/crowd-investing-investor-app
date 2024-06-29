@@ -25,8 +25,12 @@ const userSlice = createSlice({
         setAmountsHidden: (state, action) => {
             state.amountsHidden = action.payload;
         },
+        logUserOut: (state) => {
+            state.userData = initialState.userData;
+            state.accessToken = null;
+        },
     },
 });
 
-export const { setUserData, setAccessToken, setAmountsHidden } = userSlice.actions;
+export const { setUserData, setAccessToken, setAmountsHidden, logUserOut } = userSlice.actions;
 export default userSlice.reducer;

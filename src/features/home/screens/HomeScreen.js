@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet, Text, Dimensions } from "react-native";
 import CustomSafeArea from "src/shared/components/CustomSafeArea";
-import { BLACK_COLOR, ERROR_COLOR, PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
-import { Entypo, Fontisto } from '@expo/vector-icons';
+import { ERROR_COLOR, PRIMARY_COLOR, GREY_COLOR } from "src/shared/constants/colorConstants";
+import { Fontisto, Entypo } from '@expo/vector-icons';
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
-import { LineChart, PieChart } from 'react-native-chart-kit';
 import Carousel from 'react-native-reanimated-carousel';
 import CampaignCard from "../components/CampaignCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,7 +11,6 @@ import { useGetLoggedInUserQuery } from "src/shared/state/api/apiSlice";
 import { setUserData } from "src/shared/state/userSlice";
 import { CURRENCY } from "src/shared/constants/dataConstants";
 import InvestmentSummary from "../components/InvestmentSummary";
-import { useNavigation } from "@react-navigation/native";
 
 export default function HomeScreen() {
     const userData = useSelector((state) => state.user.userData);
@@ -27,45 +25,8 @@ export default function HomeScreen() {
         }
     }, [data]);
 
-    const fakeData = [
-        {
-            img: "https://pathmonk.com/wp-content/uploads/2024/01/best-startup-marketing-campaigns-1024x585.png",
-            campaignTitle: "Free Business Education",
-            sharesBought: 10
-        },
-        {
-            img: "https://cdn.britannica.com/74/190774-131-CC3FEB1F/jeans-denim-pants-clothing.jpg",
-            campaignTitle: "Low-Waisted Pants Shop",
-            sharesBought: 50000
-        },
-        {
-            img: "https://i.etsystatic.com/11931609/r/il/7c1191/1091679622/il_570xN.1091679622_ggrp.jpg",
-            campaignTitle: "Crystal Jewelry Shop",
-            sharesBought: 30
-        },
-        {
-            img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcj3h0gMQw65xbDcE-RibsElSyU6Zz9pDRqzCiWlMqoA&s",
-            campaignTitle: "Car at Your Door Co",
-            sharesBought: 1
-        },
-        {
-            img: "https://store-images.s-microsoft.com/image/apps.56161.9007199266246365.1d5a6a53-3c49-4f80-95d7-78d76b0e05d0.a3e87fea-e03e-4c0a-8f26-9ecef205fa7b",
-            campaignTitle: "Watch with Ease",
-            sharesBought: 1
-        }
-    ];
-
-    const user = {
-        name: "Ali Husni",
-        balance: 12253.70,
-        spending: 6234.00,
-        currency: "$",
-        notifications: 10
-    };
-
     const formattedBalance = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(userData.wallet_amount);
-    const formattedSpending = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(user.spending);
-
+    const formattedSpending = new Intl.NumberFormat("en", { minimumFractionDigits: 2 }).format(userData.spending);
 
     return (
         <CustomSafeArea backgroundColor={PRIMARY_COLOR.main}>
@@ -80,7 +41,7 @@ export default function HomeScreen() {
                     </View>
                 </View>
                 <Text style={styles.balanceHeading}>Your Available Balance</Text>
-                <Text style={styles.balance}>{CURRENCY} {formattedBalance}</Text>
+                <Text style={styles.balance}>{CURRENCY}{formattedBalance}</Text>
             </View>
             <InvestmentSummary
                 formattedSpending={formattedSpending}
@@ -90,21 +51,32 @@ export default function HomeScreen() {
                 <View style={styles.titleView}>
                     <Text style={styles.recentTxtStyle}>Your Investments: </Text>
                 </View>
-                <Carousel
-                    loop
-                    width={Dimensions.get("screen").width}
-                    height={300}
-                    mode="parallax"
-                    modeConfig={{
-                        parallaxScrollingScale: 0.8,
-                        parallaxScrollingOffset: 150,
-                    }}
-                    data={campaignParticipations}
-                    scrollAnimationDuration={100}
-                    renderItem={({ item }) => (
-                        <CampaignCard participation={item} imgUri={item.campaign.image_url} title={item.startup.name} sharesBought={item.number_of_shares} />
-                    )}
-                />
+                {campaignParticipations && campaignParticipations.length > 0 ? (
+                    <Carousel
+                        width={Dimensions.get("screen").width}
+                        height={270}
+                        mode="parallax"
+                        modeConfig={{
+                            parallaxScrollingScale: 0.7,
+                            parallaxScrollingOffset: 170,
+                        }}
+                        data={campaignParticipations}
+                        scrollAnimationDuration={100}
+                        renderItem={({ item }) => (
+                            <CampaignCard participation={item} />
+                        )}
+                    />
+                ) : (
+                    <View style={styles.noParticipationsContainer}>
+                        <Entypo name="emoji-happy" size={48} color={PRIMARY_COLOR.main} style={styles.noParticipationsIcon} />
+                        <Text style={styles.noParticipationsText}>
+                            You have no campaign participations.
+                        </Text>
+                        <Text style={styles.noParticipationsSubText}>
+                            Check out campaigns in the <Text style={styles.campaignsTabText}>Campaigns tab</Text>!
+                        </Text>
+                    </View>
+                )}
             </View>
         </CustomSafeArea>
     );
@@ -142,19 +114,6 @@ const styles = StyleSheet.create({
     notifications: {
         marginRight: "3%",
     },
-    notifCount: {
-        color: "white",
-        textAlign: "center",
-    },
-    notifCountContainer: {
-        backgroundColor: ERROR_COLOR.main,
-        width: 27,
-        paddingVertical: 2,
-        borderRadius: 5,
-        position: "absolute",
-        top: -7,
-        left: 9,
-    },
     balanceHeading: {
         color: PRIMARY_COLOR.light,
         fontSize: FONT_SIZE.small,
@@ -183,5 +142,34 @@ const styles = StyleSheet.create({
     titleView: {
         width: "100%",
         paddingHorizontal: "5%",
+    },
+    noParticipationsContainer: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        paddingHorizontal: '5%',
+        paddingVertical: 20,
+        backgroundColor: GREY_COLOR.lightest,
+        borderRadius: 10,
+        margin: 10,
+    },
+    noParticipationsIcon: {
+        marginBottom: 10,
+    },
+    noParticipationsText: {
+        fontSize: FONT_SIZE.large,
+        fontWeight: 'bold',
+        color: GREY_COLOR.dark,
+        textAlign: 'center',
+    },
+    noParticipationsSubText: {
+        fontSize: FONT_SIZE.medium,
+        color: GREY_COLOR.medium,
+        textAlign: 'center',
+        marginTop: 5,
+    },
+    campaignsTabText: {
+        color: PRIMARY_COLOR.main,
+        fontWeight: 'bold',
     },
 });

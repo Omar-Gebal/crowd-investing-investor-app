@@ -5,7 +5,7 @@ import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
 import { PRIMARY_COLOR } from 'src/shared/constants/colorConstants';
 import { useSelector } from 'react-redux';
 
-function Pfp(props) {
+function Pfp() {
     const userData = useSelector((state) => state.user.userData);
     const [fontsLoaded, fontError] = useFonts({
         'Migae': require('assets/fonts/MigaeSemibold-3zd2M.otf'),
@@ -21,8 +21,8 @@ function Pfp(props) {
 
     return (
         <View style={styles.container}>
-            <Text style={{ fontFamily: 'Migae', fontSize: 50 }}>{`${userData.first_name[0]}${userData.last_name[0]}`}</Text>
-        </View>
+            {userData.first_name && userData.last_name && <Text style={{ fontFamily: 'Migae', fontSize: 50 }}>{`${userData.first_name[0]}${userData.last_name[0]}`}</Text>}
+        </View >
     );
 }
 

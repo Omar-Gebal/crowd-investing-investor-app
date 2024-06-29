@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from 'src/features/home/screens/HomeScreen';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { AntDesign, Entypo } from '@expo/vector-icons';
-import AllCamaignsScreen from 'src/features/campgains/screens/AllCampaignsScreen';
+import AllCamaignsScreen from 'src/features/campaigns/screens/AllCampaignsScreen';
 import WalletScreen from 'src/features/wallet/screens/WalletScreen';
 import { PRIMARY_COLOR } from '../constants/colorConstants';
 import ProfileScreen from 'src/features/profile/screens/ProfileScreen';
@@ -28,9 +28,9 @@ export default function TabNavigator() {
                     ),
                 }}
             />
-            <Tab.Screen name="Campgains" component={AllCamaignsScreen}
+            <Tab.Screen name="Campaigns" component={AllCamaignsScreen}
                 options={{
-                    tabBarLabel: 'Campgains',
+                    tabBarLabel: 'Campaigns',
                     tabBarIcon: ({ color, size }) => (
                         <AntDesign name="copy1" size={size} color={color} />
                     ),

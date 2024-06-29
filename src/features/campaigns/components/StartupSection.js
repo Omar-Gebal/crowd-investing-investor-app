@@ -4,6 +4,7 @@ import { GREY_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from 'src/shared/constants
 import DefaultActivityIndicator from 'src/shared/components/DefaultActivityIndicator';
 import FormErrorText from 'src/shared/components/FormErrorText';
 import DefaultVerticalSpacing from 'src/features/auth/components/DefaultVerticalSpacing';
+import { CURRENCY } from 'src/shared/constants/dataConstants';
 
 function StartupSection({ startup, isLoading, isError, styles, HighlightedText }) {
     const getSuccessRateColor = (rate) => {
@@ -29,7 +30,7 @@ function StartupSection({ startup, isLoading, isError, styles, HighlightedText }
             <DefaultVerticalSpacing />
             <Text style={styles.sectionTitle}>Funding Stages</Text>
             {startup.funding_stages.map((stage) => (
-                <Text key={stage.id} style={styles.sectionItem}>💵 {stage.name}: <HighlightedText text={`$${stage.amount_funded.toLocaleString()} on ${new Date(stage.date).toLocaleDateString()}`} /></Text>
+                <Text key={stage.id} style={styles.sectionItem}>💵 {stage.name}: <HighlightedText text={`${CURRENCY}${stage.amount_funded.toLocaleString()} on ${new Date(stage.date).toLocaleDateString()}`} /></Text>
             ))}
         </View>
     );

@@ -1,1 +1,1 @@
-export const CURRENCY = 'EGP'
+export const CURRENCY = '$'

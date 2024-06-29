@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { StyleSheet, Text, TextInput, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import CustomInput from "src/features/auth/components/CustomInput";
-import NumberPad from "src/features/campgains/components/NumberPad";
+import NumberPad from "src/features/campaigns/components/NumberPad";
 import CustomButton from "src/shared/components/CustomButton";
 import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
 import { CURRENCY } from "src/shared/constants/dataConstants";

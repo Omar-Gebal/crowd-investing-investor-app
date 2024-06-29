@@ -47,7 +47,7 @@ function WalletScreen({ navigation }) {
             <View style={styles.container}>
                 <View style={styles.topPart}>
                     <Text style={{ fontSize: FONT_SIZE.small, color: "white" }}>Available balance</Text>
-                    <Text style={{ fontWeight: "bold", fontSize: FONT_SIZE.large, color: "white" }}>{hidden ? 'XXXX' : userData.wallet_amount} {CURRENCY}</Text>
+                    <Text style={{ fontWeight: "bold", fontSize: FONT_SIZE.large, color: "white" }}>{CURRENCY}{hidden ? 'XXXX' : userData.wallet_amount}</Text>
                 </View>
                 <View style={styles.block}>
                     <BlockOfActions navigation={navigation} />

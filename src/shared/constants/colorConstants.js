@@ -17,6 +17,10 @@ const GREY_COLOR = {
     light: "#ACB5BB",
     medium: "#6C7278"
 }
+const RED_COLOR = {
+    main: '#FF6B6B'
+}
+
 
 const ERROR_COLOR = {
     main: "#CE2C60",
@@ -28,4 +32,4 @@ const BLACK_COLOR = {
 }
 
 
-export { PRIMARY_COLOR, SECONDARY_COLOR, GREY_COLOR, ERROR_COLOR, BLACK_COLOR };
+export { PRIMARY_COLOR, SECONDARY_COLOR, GREY_COLOR, ERROR_COLOR, BLACK_COLOR, RED_COLOR };

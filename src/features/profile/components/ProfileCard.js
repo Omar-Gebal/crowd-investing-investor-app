@@ -7,13 +7,12 @@ import FormErrorText from "src/shared/components/FormErrorText";
 import DefaultVerticalSpacing from "src/features/auth/components/DefaultVerticalSpacing";
 import { useDispatch, useSelector } from "react-redux";
 import { useEditProfileMutation } from "src/shared/state/api/apiSlice";
-import { emailRegexPattern } from "src/shared/utils/validators";
 import { useState } from "react";
 import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
-import { setUserData } from "src/shared/state/userSlice";
-import { SECONDARY_COLOR } from "src/shared/constants/colorConstants";
+import { logUserOut, setUserData } from "src/shared/state/userSlice";
+import { SECONDARY_COLOR, ERROR_COLOR, RED_COLOR } from "src/shared/constants/colorConstants";
 
-function ProfileCard(props) {
+function ProfileCard({ navigation }) {
     const [editSuccessful, setEditSuccessful] = useState(false);
     const dispatch = useDispatch();
     const userData = useSelector((state) => state.user.userData);
@@ -40,11 +39,16 @@ function ProfileCard(props) {
             dispatch(setUserData(response.data));
         }
         console.log(response);
-    }
+    };
+
+    const handleLogout = () => {
+        dispatch(logUserOut());
+        navigation.navigate("SignIn")
+
+    };
 
     return (
         <View style={styles.container}>
-
             <Pfp />
             <View style={styles.formStyle}>
                 <Field control={control} label={'First Name'} name="first_name" rules={{ required: true }} />
@@ -55,7 +59,6 @@ function ProfileCard(props) {
                 {errors.last_name && <FormErrorText marginLeft={0} text={"Last name required"} />}
                 <DefaultVerticalSpacing />
 
-
                 <Field control={control} label={'Phone number'} name="phone_number" rules={{ required: true }} />
                 {errors.phone_number && <FormErrorText marginLeft={0} text={"Phone number required"} />}
                 <DefaultVerticalSpacing />
@@ -63,16 +66,17 @@ function ProfileCard(props) {
                     <CustomButton onPress={handleSubmit(onSubmit)} title={isLoading ? <DefaultActivityIndicator /> : "Save changes"} />
                     {editSuccessful && <Text style={styles.successMessageStyle}> Your profile is edited successfully</Text>}
                 </View>
+                <DefaultVerticalSpacing />
+                <CustomButton color={RED_COLOR.main} onPress={handleLogout} title="Logout" style={styles.logoutButton} textStyle={styles.logoutButtonText} />
             </View>
-
         </View>
     );
-
 }
+
 const styles = StyleSheet.create({
     container: {
         width: 400,
-        height: 450,
+        height: 510,
         elevation: 10,
         zIndex: 10,
         borderRadius: 10,
@@ -83,7 +87,7 @@ const styles = StyleSheet.create({
     },
     formStyle: {
         margin: 20,
-        height: 400,
+        height: 450, // Adjusted height to accommodate the logout button
         padding: 1,
     },
     successMessageStyle: {
@@ -96,6 +100,20 @@ const styles = StyleSheet.create({
     },
     marginRemover: {
         marginLeft: 0
+    },
+    logoutButton: {
+        backgroundColor: ERROR_COLOR.main,
+        borderRadius: 10,
+        paddingVertical: 10,
+        paddingHorizontal: 20,
+        alignSelf: 'center',
+    },
+    logoutButtonText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
     }
-})
+});
+
 export default ProfileCard;

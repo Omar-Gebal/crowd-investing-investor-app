@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { View, StyleSheet, Text, Dimensions, TouchableOpacity } from "react-native";
-import { GREY_COLOR, BLACK_COLOR, ERROR_COLOR, PRIMARY_COLOR, SECONDARY_COLOR } from "src/shared/constants/colorConstants";
+import { GREY_COLOR, BLACK_COLOR, PRIMARY_COLOR, SECONDARY_COLOR, ERROR_COLOR } from "src/shared/constants/colorConstants";
 import { AntDesign } from '@expo/vector-icons';
 import { PieChart } from 'react-native-chart-kit';
 import { CURRENCY } from 'src/shared/constants/dataConstants';
@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import DefaultActivityIndicator from 'src/shared/components/DefaultActivityIndicator';
 import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
 
-const InvestmentSummary = ({ formattedSpending }) => {
+const InvestmentSummary = () => {
     const accessToken = useSelector((state) => state.user.accessToken);
     const { data, isLoading, isError, refetch } = useGetInvestmentsPerIndustryQuery(accessToken, { refetchOnMountOrArgChange: true });
 
@@ -25,7 +25,6 @@ const InvestmentSummary = ({ formattedSpending }) => {
         }
         return 0;
     }, [data, isLoading, isError]);
-
 
     // Transform the data for the pie chart
     const pieData = investmentsPerIndustry.map((investment, index) => ({
@@ -52,15 +51,20 @@ const InvestmentSummary = ({ formattedSpending }) => {
     return (
         <View style={styles.lowerContainer}>
             <View style={styles.floatingCard}>
-                {investmentsPerIndustry.length === 0 ?
-                    (isLoading ?
-                        <DefaultActivityIndicator color={SECONDARY_COLOR.dark} /> : <Text style={{ alignSelf: "center" }}> No Investments Made Yet</Text>)
-                    :
+                {investmentsPerIndustry.length === 0 ? (
+                    isLoading ? (
+                        <DefaultActivityIndicator color={SECONDARY_COLOR.dark} />
+                    ) : (
+                        <View style={styles.noInvestmentsContainer}>
+                            <Text style={styles.noInvestmentsText}>No Investments Made Yet</Text>
+                        </View>
+                    )
+                ) : (
                     <View>
                         <Text style={styles.spendingHeading}>Total Investment Value:</Text>
                         <View style={styles.spendingCont}>
                             <View>
-                                <Text style={styles.spending}>{CURRENCY} {totalInvestment}</Text>
+                                <Text style={styles.spending}>{CURRENCY}{totalInvestment}</Text>
                             </View>
                             <TouchableOpacity onPress={handleRefresh}>
                                 <AntDesign name="reload1" size={24} color={PRIMARY_COLOR} />
@@ -83,7 +87,7 @@ const InvestmentSummary = ({ formattedSpending }) => {
                             backgroundColor={"transparent"}
                         />
                     </View>
-                }
+                )}
             </View>
         </View>
     );
@@ -93,7 +97,7 @@ const styles = StyleSheet.create({
     lowerContainer: {
         backgroundColor: GREY_COLOR.lightest,
         paddingHorizontal: '5%',
-        height: 190,
+        height: 170,
     },
     floatingCard: {
         backgroundColor: "white",
@@ -108,6 +112,18 @@ const styles = StyleSheet.create({
         display: "flex",
         minHeight: 250,
         justifyContent: "center",
+    },
+    noInvestmentsContainer: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingVertical: 20,
+    },
+    noInvestmentsText: {
+        color: GREY_COLOR.dark,
+        fontSize: FONT_SIZE.large,
+        fontWeight: 'bold',
+        marginTop: 10,
+        textAlign: 'center',
     },
     spendingCont: {
         display: "flex",
@@ -138,7 +154,7 @@ const styles = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        backgroundColor: ERROR_COLOR.light,
+        backgroundColor: ERROR_COLOR.main,
         paddingHorizontal: 6,
         paddingVertical: 5,
         borderRadius: 12,

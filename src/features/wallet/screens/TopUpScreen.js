@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import NumberPad from "src/features/campgains/components/NumberPad";
+import NumberPad from "src/features/campaigns/components/NumberPad";
 import CustomButton from "src/shared/components/CustomButton";
 import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
 import { FONT_SIZE, MARGINS } from "src/shared/constants/dimension_constants";
