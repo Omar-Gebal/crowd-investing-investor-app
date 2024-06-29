@@ -5,6 +5,7 @@ import DefaultActivityIndicator from 'src/shared/components/DefaultActivityIndic
 import FormErrorText from 'src/shared/components/FormErrorText';
 import DefaultVerticalSpacing from 'src/features/auth/components/DefaultVerticalSpacing';
 import { CURRENCY } from 'src/shared/constants/dataConstants';
+import GradientText from './GradientText';
 
 function StartupSection({ startup, isLoading, isError, styles, HighlightedText }) {
     const getSuccessRateColor = (rate) => {
@@ -20,7 +21,7 @@ function StartupSection({ startup, isLoading, isError, styles, HighlightedText }
             <Text style={styles.sectionItem}>🌐 Website: <HighlightedText text={startup.website_url} /></Text>
             <Text style={styles.sectionItem}>💼 LinkedIn: <HighlightedText text={startup.linkedin_url} /></Text>
             <DefaultVerticalSpacing />
-            <Text style={internalStyles.bigTitle}>Predicted Success Rate</Text>
+            <GradientText text="Success Prediction" />
             <Text style={[internalStyles.successRate, { color: getSuccessRateColor(startup.success_rate) }]}>
                 {`${(startup.success_rate).toFixed(2)}%`}
             </Text>

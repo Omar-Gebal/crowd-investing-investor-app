@@ -9,6 +9,7 @@ import { useGetStartupDetailsQuery } from 'src/shared/state/api/apiSlice';
 import StartupSection from '../components/StartupSection';
 import { useNavigation } from '@react-navigation/native';
 
+
 function CampaignDetailsScreen({ navigation }) {
     const selectedCampaign = useSelector((state) => state.campaign.selectedCampaign)
     const startDate = new Date(selectedCampaign.start_time).toLocaleString().split(',')[0]
