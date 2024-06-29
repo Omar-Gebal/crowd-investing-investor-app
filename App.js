@@ -25,9 +25,10 @@ export default function App() {
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name='UploadId' component={UploadIdScreen} />
             <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='TabNavigator' component={TabNavigator} />
-            <Stack.Screen name='UploadId' component={UploadIdScreen} />
+           
             <Stack.Screen name='SignUp' component={SignUpScreen} />
 
             <Stack.Screen options={{ headerShown: true, title: 'Top up wallet' }} name='TopUp' component={TopUpScreen} />
