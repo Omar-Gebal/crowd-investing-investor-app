@@ -54,7 +54,7 @@ export default function HomeScreen() {
                 {campaignParticipations && campaignParticipations.length > 0 ? (
                     <Carousel
                         width={Dimensions.get("screen").width}
-                        height={270}
+                        height={290}
                         mode="parallax"
                         modeConfig={{
                             parallaxScrollingScale: 0.7,

@@ -56,6 +56,9 @@ const InvestmentSummary = () => {
                         <DefaultActivityIndicator color={SECONDARY_COLOR.dark} />
                     ) : (
                         <View style={styles.noInvestmentsContainer}>
+                            <TouchableOpacity onPress={handleRefresh}>
+                                <AntDesign name="reload1" size={34} color={PRIMARY_COLOR} />
+                            </TouchableOpacity>
                             <Text style={styles.noInvestmentsText}>No Investments Made Yet</Text>
                         </View>
                     )
@@ -72,7 +75,7 @@ const InvestmentSummary = () => {
                         </View>
                         <PieChart
                             data={pieData}
-                            style={styles.lineGraph}
+                            style={styles.pieGraph}
                             width={Dimensions.get("window").width}
                             height={150}
                             chartConfig={{
@@ -167,7 +170,7 @@ const styles = StyleSheet.create({
         lineHeight: 21,
         marginLeft: 2,
     },
-    lineGraph: {
+    pieGraph: {
         position: "relative",
         left: -40,
     },
