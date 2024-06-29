@@ -7,8 +7,10 @@ import { PRIMARY_COLOR } from 'src/shared/constants/colorConstants';
 import CustomButton from 'src/shared/components/CustomButton';
 import DefaultVerticalSpacing from '../components/DefaultVerticalSpacing';
 import * as ImagePicker from 'expo-image-picker';
+import { AntDesign } from '@expo/vector-icons';
+import CustomModal from '../components/CustomModal';
 
-function UploadIdScreen(props) {
+function UploadIdScreen({ navigation }) {
   const [facing, setFacing] = useState(Camera.Constants.Type.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [photo1, setPhoto1] = useState(null);
@@ -16,6 +18,13 @@ function UploadIdScreen(props) {
   const [cameraVisible, setCameraVisible] = useState(false);
   const firstPictureTaken = useRef(false);
   const cameraRef = useRef(null);
+  const [modalVisible, setModalVisible] = useState(false)
+
+    function handleModal() {
+        setModalVisible(!modalVisible);
+        navigation.navigate("TabNavigator");
+    }
+
 
   useEffect(() => {
     if (!permission) {
@@ -91,7 +100,12 @@ function UploadIdScreen(props) {
       <View style={styles.container}>
         <View style={styles.upperHalf}>
           <DefaultVerticalSpacing />
-          <Text style={{fontSize:FONT_SIZE.large, fontWeight:"bold"}}>Final Step</Text>
+          <View style={{flexDirection:"row", alignItems:"baseline", justifyContent:"space-between"}}>
+            <Text style={{fontSize:FONT_SIZE.large, fontWeight:"bold"}}>Final Step</Text> 
+            {photo2?(<TouchableOpacity onPress={() => {setModalVisible(true);}}>
+              <AntDesign name="arrowright" size={24} color="black" />
+            </TouchableOpacity>):<Text>provide pictures of your ID to contiue</Text>}
+          </View>
           <DefaultVerticalSpacing />
           <Text style={{fontSize:FONT_SIZE.medium}}>Please verify your identity by providing images of the front and back faces of your ID card</Text>
         </View>
@@ -113,6 +127,7 @@ function UploadIdScreen(props) {
           )}
         </View>
       </View>
+      <CustomModal mainTxt="Your ID has been sent for verification" subTxt="It'll take some time until your ID gets validated" visible={modalVisible} onPress={handleModal} />
     </CustomSafeArea>
   );
 }
