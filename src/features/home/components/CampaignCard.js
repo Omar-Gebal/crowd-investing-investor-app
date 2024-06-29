@@ -2,15 +2,18 @@ import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { GREY_COLOR, BLACK_COLOR } from "src/shared/constants/colorConstants";
 import { FONT_SIZE } from "src/shared/constants/dimension_constants";
 
-function CampaignCard({ imgUri, title, sharesBought }) {
+function CampaignCard({ participation, imgUri, title, sharesBought }) {
+    const { number_of_shares } = participation;
+    const { name } = participation.startup;
+    const { image_url } = participation.campaign;
     return (
         <View style={styles.cardContainer}>
             <Pressable style={styles.imageContainer}>
-                <Image source={{ uri: imgUri }} style={styles.image} />
+                <Image source={{ uri: image_url }} style={styles.image} />
             </Pressable>
             <View style={styles.informationSection}>
-                <Text style={styles.title}>{title}</Text>
-                <Text style={styles.sharesBought}>You Own: {sharesBought} {sharesBought > 1 ? 'shares' : 'share'}</Text>
+                <Text style={styles.title}>{name}</Text>
+                <Text style={styles.sharesBought}>You Own: {number_of_shares} {number_of_shares > 1 ? 'shares' : 'share'}</Text>
             </View>
         </View>
     );
