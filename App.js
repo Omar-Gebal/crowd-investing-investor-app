@@ -3,7 +3,6 @@ import { Provider } from 'react-redux'
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import SignInScreen from 'src/features/auth/screens/SignInScreen';
 import SignUpScreen from 'src/features/auth/screens/SignUpScreen';
@@ -25,10 +24,9 @@ export default function App() {
       <SafeAreaProvider>
         <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name='UploadId' component={UploadIdScreen} />
             <Stack.Screen name='SignIn' component={SignInScreen} />
             <Stack.Screen name='TabNavigator' component={TabNavigator} />
-           
+            <Stack.Screen name='UploadId' component={UploadIdScreen} />
             <Stack.Screen name='SignUp' component={SignUpScreen} />
 
             <Stack.Screen options={{ headerShown: true, title: 'Top up wallet' }} name='TopUp' component={TopUpScreen} />

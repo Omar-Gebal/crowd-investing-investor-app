@@ -31,7 +31,16 @@ export const apiSlice = createApi({
                 }
 
             })
-
+        }),
+        uploadVerificationId: builder.mutation({
+            query: ({ image, accessToken }) => ({
+                url: `/investors/me/id_document`,
+                method: "POST",
+                body: image,
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            }),
         }),
 
         //campaigns
@@ -97,7 +106,6 @@ export const apiSlice = createApi({
                     authorization: `Bearer ${accessToken}`
                 }
             })
-
         }),
     })
 })
@@ -106,6 +114,7 @@ export const {
     useSignInMutation,
     useSignUpMutation,
     useGetLoggedInUserQuery,
+    useUploadVerificationIdMutation,
     useGetAllCampaignsQuery,
     useGetCampaignQuery,
     useGetStartupDetailsQuery,
