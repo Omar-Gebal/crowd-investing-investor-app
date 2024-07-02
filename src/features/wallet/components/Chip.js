@@ -4,7 +4,6 @@ import { FONT_SIZE } from 'src/shared/constants/dimension_constants';
 
 function Chip({ title, onPress, locked }) {
 
-  //console.log(title + " chip pressed "+ locked);
   return (
     <Pressable onPress={onPress} style={[styles.container, locked && styles.containerPressed]}>
       <Text style={[styles.titleStyle, locked && styles.titlePressedStyle]}>{title}</Text>

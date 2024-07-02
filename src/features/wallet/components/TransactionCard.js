@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         borderColor: GREY_COLOR.lightest,
         alignItems: "center",
         justifyContent: "space-between",
-        marginBottom: 10                             //i know the margin between the cards should be applied in the parent screen, but i cant figure it out
+        marginBottom: 10
 
     },
     leftSide: {

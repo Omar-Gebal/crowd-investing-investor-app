@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import NumberPad from "src/features/campaigns/components/NumberPad";
 import CustomButton from "src/shared/components/CustomButton";
 import DefaultActivityIndicator from "src/shared/components/DefaultActivityIndicator";
+import { CURRENCY } from "src/shared/constants/dataConstants";
 import { FONT_SIZE, MARGINS } from "src/shared/constants/dimension_constants";
 import { useTopUpWalletMutation } from "src/shared/state/api/apiSlice";
 import { clearNumber } from "src/shared/state/numPadSlice";
@@ -37,7 +38,7 @@ function TopUpScreen(props) {
         <View style={styles.mainContainer}>
             <View style={styles.top}>
                 <Text style={styles.mainText}>How much balance do you want to add to your wallet ?</Text>
-                <Text style={styles.balanceText}>EGP {top_up_amount === '' ? '00' : top_up_amount}</Text>
+                <Text style={styles.balanceText}>{CURRENCY} {top_up_amount === '' ? '00' : top_up_amount}</Text>
                 <CustomButton title={isLoading ? <DefaultActivityIndicator /> : "Confirm"} onPress={handleTopUp} />
             </View>
 

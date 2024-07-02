@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     },
     formStyle: {
         margin: 20,
-        height: 450, // Adjusted height to accommodate the logout button
+        height: 450,
         padding: 1,
     },
     successMessageStyle: {

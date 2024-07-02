@@ -58,7 +58,7 @@ function UploadIdScreen({ navigation }) {
     setModalVisible(true);
     console.log(userId);
     const formData = new FormData();
-    formData.append("front", {
+    formData.append("id_document", {
       uri: photo1,
       name: `id_front_${userId}.jpg`,
       type: "image/jpeg",

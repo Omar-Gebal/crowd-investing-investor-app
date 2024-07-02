@@ -68,13 +68,13 @@ export default function ForgotPassScreen({ navigation }) {
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#0000',
-        paddingHorizontal: '5%',              //add to constants later
+        paddingHorizontal: '5%',
         height: '100%',
         justifyContent: 'space-between',
-        backgroundColor:"white"
+        backgroundColor: "white"
     },
     formView: {
-        paddingBottom: '5%',                  //add to constants later
+        paddingBottom: '5%',
         backgroundColor: '#0000',
         height: '80%',
         justifyContent: 'space-between'

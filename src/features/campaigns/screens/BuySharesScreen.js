@@ -13,6 +13,7 @@ import { useBuySharesMutation, useGetCampaignQuery, useGetLoggedInUserQuery } fr
 import DefaultActivityIndicator from 'src/shared/components/DefaultActivityIndicator';
 import { setSelectedCampaign } from 'src/shared/state/campaignSlice';
 import { clearNumber } from 'src/shared/state/numPadSlice';
+import { CURRENCY } from 'src/shared/constants/dataConstants';
 
 
 function BuySharesScreen({ navigation }) {
@@ -40,7 +41,6 @@ function BuySharesScreen({ navigation }) {
     }
 
     useEffect(() => {
-        console.log('haha')
         if (updatedCampaign) {
             dispatch(setSelectedCampaign(updatedCampaign));
         }
@@ -71,10 +71,10 @@ function BuySharesScreen({ navigation }) {
                 <View style={styles.sharesView}>
                     <Text></Text>
                     <Text style={styles.sharesTxtStyle}>{numOfShares === '' ? '0' : numOfShares} Shares</Text>
-                    <Text style={styles.EgpTxtStyle}>= EGP {numOfShares * selectedCampaign.share_price}</Text>
+                    <Text style={styles.EgpTxtStyle}>= {CURRENCY} {numOfShares * selectedCampaign.share_price}</Text>
                 </View>
                 <CustomButton title={isLoading ? <DefaultActivityIndicator /> : "Buy Shares"} onPress={handleBuyShare} />
-                <Text style={styles.balanceTxtStyle}>Current Wallet balance : {walletAmount} EGP</Text>
+                <Text style={styles.balanceTxtStyle}>Current Wallet balance : {CURRENCY}{walletAmount}</Text>
             </View>
             <View style={styles.bottom}>
                 <NumberPad />
